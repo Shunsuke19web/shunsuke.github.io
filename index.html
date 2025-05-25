@@ -16,29 +16,54 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow:
           0 4px 30px rgba(0, 0, 0, 0.1),
-          inset 0 0 30px rgba(255, 255, 255, 0.05);
+          inset 0 0 20px rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         position: relative;
         overflow: hidden;
-        transition: box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
         z-index: 0;
         opacity: 0;
         transform: scale(0.95);
         animation: popup 0.5s forwards;
       }
-
-
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        top: -40%;
+        left: -30%;
+        width: 150%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(255, 255, 255, 0) 60%
+        );
+        transform: rotate(25deg);
+        filter: blur(60px);
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        opacity: 0.5;
+        z-index: 1;
+      }
+.gradient-name {
+  font-size: 3rem; /* Adjust size as needed */
+  font-weight: 800;
+  background: linear-gradient(180deg, #d4d4d4, #8a8a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.5;
+ 
+}
       .glass-card:hover {
         box-shadow:
-          0 8px 60px rgba(255, 255, 255, 0.25),
-          inset 0 0 50px rgba(255, 255, 255, 0.1);
+          0 8px 30px rgba(255, 255, 255, 0.15),
+          inset 0 0 30px rgba(255, 255, 255, 0.06);
+        transform: scale(1.03);
       }
 
 
-      .glass-card::after,
-      .btn-glow::after,
-      .text-glow::after {
+      .glass-card::after {
         content: "";
         position: absolute;
         top: 0;
@@ -46,8 +71,16 @@
         right: 0;
         bottom: 0;
         border-radius: inherit;
-        padding: 2px;
-        background: linear-gradient(135deg, #f70157, #1aa2fe, #fdab01, #a953fa);
+        padding: 3px;
+        background: linear-gradient(
+          270deg,
+          #f70157,
+          #1aa2fe,
+          #fdab01,
+          #a953fa,
+          #f70157
+        );
+        background-size: 1000% 1000%;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask: linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
@@ -56,22 +89,76 @@
         opacity: 0;
         transition: opacity 0.4s ease;
         z-index: -1;
+        animation: rainbowGlow 5s linear infinite;
       }
 
 
-      .glass-card:hover::after,
-      .btn-glow:hover::after,
-      .text-glow:hover::after {
+      .glass-card:hover::after {
         opacity: 1;
       }
 
 
-      .btn-glow,
       .text-glow {
         position: relative;
         border-radius: 0.75rem;
         overflow: hidden;
         z-index: 0;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+      }
+
+
+      .text-glow:hover {
+        color: #ffffff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      }
+
+
+      /* Permanent glowing border on the button edges only */
+      .btn-glow {
+        position: relative;
+        border-radius: 0.75rem;
+        background-color: #1c1c1c;
+        color: white;
+        padding: 0.5rem 1.25rem; /* px-5 py-2 */
+        font-weight: 500;
+        overflow: visible;
+        z-index: 0;
+        border: 1px solid transparent;
+        transition: color 0.3s ease;
+      }
+
+
+      .btn-glow::after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: inherit;
+        padding: 3px;
+        background: linear-gradient(
+          270deg,
+          #f70157,
+          #1aa2fe,
+          #fdab01,
+          #a953fa,
+          #f70157
+        );
+        background-size: 1000% 1000%;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: destination-out;
+        animation: rainbowGlow 20s linear infinite;
+        z-index: -1;
+        opacity: 1;
+      }
+
+
+      .btn-glow:hover {
+        color: #fff;
       }
 
 
@@ -85,46 +172,63 @@
           transform: scale(1);
         }
       }
+
+
+      @keyframes rainbowGlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
     </style>
   </head>
 
 
-  <!-- Navbar -->
-<header class="max-w-6xl mx-auto flex justify-between items-center px-6 py-6 text-white">
-  <h1 class="text-2xl font-bold">Fernando</h1>
-  <nav class="hidden md:flex space-x-6">
-    <a href="#" class="text-glow px-4 rounded-md">Home</a>
-    <a href="#" class="text-glow px-4 rounded-md">About</a>
-    <a href="#" class="text-glow px-4 rounded-md">Works</a>
-    <a href="#" class="text-glow px-4 rounded-md">Contact</a>
-  </nav>
-  <button
-    class="btn-glow bg-[#1c1c1c] px-5 py-2 rounded-xl font-medium transition"
-  >
-    Let’s talk
-  </button>
-</header>
+  <body>
+    <!-- Navbar -->
+    <header
+      class="max-w-6xl mx-auto flex justify-between items-center px-6 py-6 mt-1 mb-8 text-white"
+    >
+      <h1 class="text-2xl font-bold">Fernando</h1>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#" class="text-glow px- rounded-md">Home</a>
+        <a href="#" class="text-glow px-4 rounded-md">About</a>
+        <a href="#" class="text-glow px-4 rounded-md">Works</a>
+        <a href="#" class="text-glow px-4 rounded-md">Contact</a>
+      </nav>
+      <button
+      class="btn-glow transform transition-transform duration-300 hover:scale-105"
 
 
+      >
+        Let’s talk
+      </button>
+    </header>
 
 
     <!-- Grid Layout -->
     <section
-      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 px-6 pb-10"
+      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 px-6 pb- "
     >
       <!-- Profile Card -->
       <div
-        class="glass-card p-6 flex flex-row items-center gap-6 shadow-lg col-span-1 md:col-span-2"
+        class="glass-card p-6 flex flex-row items-center gap-6 shadow-lg col-span-1 md:col-span-2 hover:scale-105"
         style="min-height: 270px; animation-delay: 0.1s"
       >
         <img
-          <img src="https://raw.githubusercontent.com/Shunsuke19web/shunsuke.github.io/main/Shunsu.jpg" class="rounded-xl w-40 h-40 object-cover" alt="My photo" />
-
+          src="https://i.imgur.com/ohtb4tN.jpg"
+          class="rounded-xl w-48 h-48 object-cover"
+          alt="My photo"
         />
-        <div class="flex flex-col">
-          <p class="text-sm text-gray-400 mb-1">Marketer</p>
-          <h2 class="text-2xl font-bold text-white">Shunsuke Fernando.</h2>
-          <p class="text-gray-400 text-sm mt-1 max-w-md">
+        <div class="flex flex-col justify-center self-center">
+          <p class="text-lg text-gray-400 mb-1">Marketer</p>
+          <h2 class="gradient-name mt-2 mb-1 md:mt- md:mb-2">Shunsuke Fernando</h2>
+          <p class="text-gray-400 text-shadow-md mt-1 max-w-md">
             I am a Marketing Graduate from Cainta Rizal.
           </p>
         </div>
@@ -133,7 +237,7 @@
 
       <!-- Credentials Card -->
       <div
-        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg"
+        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg hover:scale-105"
         style="min-height: 270px; animation-delay: 0.2s"
       >
         <img src="https://via.placeholder.com/100x40?text=Signature" class="mb-4" />
@@ -144,10 +248,10 @@
 
       <!-- Portfolio Card -->
       <div
-        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg"
+        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg hover:scale-105"
         style="min-height: 270px; animation-delay: 0.3s"
       >
-       <img src="Shunsu.jpg" class="rounded-xl w-40 h-40 object-cover" alt="My photo" />
+        <img src="https://via.placeholder.com/180x100?text=Work+Sample" class="mb-4" />
         <p class="text-sm text-gray-400">Showcase</p>
         <h3 class="text-xl font-semibold text-white">Portfolios</h3>
       </div>
@@ -155,22 +259,22 @@
 
       <!-- Download CV -->
       <div
-        class="glass-card p-6 text-center flex flex-col justify-center items-center shadow-lg"
+        class="glass-card p-6 text-center flex flex-col justify-center items-center shadow-lg hover:scale-105"
         style="animation-delay: 0.4s"
       >
         <img
           src="https://cdn-icons-png.flaticon.com/512/2195/2195529.png"
-          class="w-12 h-12 mb-4"
+          class="w-20 h-20 mb-4"
           alt="CV Icon"
         />
         <p class="text-sm text-gray-400">My CV</p>
-        <h3 class="text-lg font-semibold text-white">Download</h3>
+        <h3 class="text-xl font-semibold text-white">Download</h3>
       </div>
 
 
       <!-- Social Links -->
       <div
-        class="glass-card p-6 flex flex-col justify-center items-center gap-4 shadow-lg"
+        class="glass-card p-6 flex flex-col justify-center items-center gap-4 shadow-lg transform transition-transform duration-300 hover:scale-105"
         style="animation-delay: 0.5s"
       >
         <div class="flex gap-6">
@@ -181,7 +285,7 @@
           >
             <img
               src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-              class="w-12 h-12"
+              class="w-18 h-18"
               alt="Instagram"
             />
           </a>
@@ -192,12 +296,12 @@
           >
             <img
               src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-              class="w-12 h-12"
+              class="w-18 h-18"
               alt="LinkedIn"
             />
           </a>
         </div>
-        <p class="text-lg font-semibold text-white">Socials</p>
+        <p class="text-xl font-semibold text-white">Socials</p>
       </div>
     </section>
 
@@ -206,9 +310,9 @@
       class="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white select-none pointer-events-none"
     >
       <span class="text-xl font-bold">Fernando</span>
-      <span class="text-sm text-gray-400 mt-1">Made by Shunsuke Fernando</span>
+      <span class="text-sm text-gray-400 mt-1">
+        Made by Shunsuke Fernando on GitHub
+      </span>
     </footer>
   </body>
 </html>
-
-
