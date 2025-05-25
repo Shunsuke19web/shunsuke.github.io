@@ -217,13 +217,6 @@
         transition: transform 0.2s ease-out, opacity 0.5s ease-in-out; /* Smooth transition for scroll and opacity effect */
       }
 
-      /* Responsive adjustments for smaller screens */
-      @media (min-width: 768px) {
-        .hero-greeting {
-          font-size: 7rem; /* Larger on medium screens and up */
-        }
-      }
-
       /* Keyframe animation for rainbow glow */
       @keyframes rainbowGlow {
         0% {
@@ -233,13 +226,69 @@
           background-position: 100% 50%; /* End at the end of the gradient */
         }
       }
+
+      /* Responsive adjustments for smaller screens */
+      @media (max-width: 768px) {
+        .hero-greeting {
+          font-size: 4rem; /* Adjust font size for smaller screens */
+        }
+
+        .glass-card {
+          flex-direction: column; /* Stack content vertically on small screens */
+          align-items: center;
+          text-align: center;
+        }
+
+        .glass-card img {
+          margin-bottom: 1rem; /* Add space below image */
+        }
+
+        .gradient-name {
+          font-size: 2.5rem; /* Adjust font size for smaller screens */
+        }
+
+        /* Ensure grid columns adapt to single column on mobile */
+        .grid-cols-1.md\:grid-cols-4 {
+          grid-template-columns: 1fr;
+        }
+
+        .col-span-1.md\:col-span-2 {
+          grid-column: span 1;
+        }
+
+        /* Hide desktop navigation on small screens */
+        .hidden.md\:flex {
+          display: none;
+        }
+
+        /* Adjust button position and size for small screens */
+        .glass-arrow-element {
+            bottom: 0.5rem; /* Adjusted for smaller screens */
+            right: 1rem;
+            padding: 0.3rem; /* Adjusted padding for smaller element */
+        }
+        .glass-arrow-element svg {
+            width: 1.5rem; /* Smaller width */
+            height: 1.5rem; /* Smaller height */
+        }
+
+        /* Further reduce padding for content within these cards if needed */
+        .glass-card .pt-8.pb-16 {
+          padding-top: 0.5rem; /* Further reduce top padding */
+          padding-bottom: 0.5rem; /* Further reduce bottom padding */
+        }
+        .glass-card .pt-12.pb-16 {
+          padding-top: 0.5rem; /* Further reduce top padding for Socials */
+          padding-bottom: 0.5rem; /* Further reduce bottom padding for Socials */
+        }
+      }
     </style>
   </head>
 
   <body>
     <header class="mx-auto mt-1 mb-8 flex max-w-6xl items-center justify-between px-6 py-6 text-white">
       <h1 class="text-2xl font-bold">Fernando</h1>
-      <nav class="flex space-x-6">
+      <nav class="hidden space-x-6 md:flex">
         <a href="#" class="text-glow rounded-md px-4">Home</a>
         <a href="#" class="text-glow rounded-md px-4">About</a>
         <a href="#" class="text-glow rounded-md px-4">Works</a>
@@ -248,7 +297,7 @@
       <button class="btn-glow transform transition-transform duration-300 hover:scale-105">Let’s talk</button>
     </header>
 
-    <h2 id="greetings-text" class="text-white text-center font-bold mb-4 mx-auto max-w-6xl px-6 flex items-center justify-center py-24 hero-greeting relative">
+    <h2 id="greetings-text" class="text-white text-center font-bold mb-4 mx-auto max-w-6xl px-6 flex items-center justify-center min-h-screen hero-greeting relative">
       Greetings!
     </h2>
 
@@ -395,4 +444,3 @@
     </script>
   </body>
 </html>
-
