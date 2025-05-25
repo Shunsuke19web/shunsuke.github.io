@@ -99,7 +99,8 @@
           #a953fa,
           #f70157
         );
-        background-size: 1000% 1000%;
+        /* Adjusted background-size for better rainbow effect */
+        background-size: 400% 100%;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask: linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
@@ -159,15 +160,17 @@
           #a953fa,
           #f70157
         );
-        background-size: 1000% 1000%;
+        /* Adjusted background-size for better rainbow effect */
+        background-size: 400% 100%;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask: linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
         mask-composite: exclude;
         -webkit-mask-composite: destination-out;
-        animation: rainbowGlow 20s linear infinite;
-        z-index: -1;
         opacity: 1;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+        animation: rainbowGlow 20s linear infinite;
       }
 
       .btn-glow:hover {
@@ -211,7 +214,7 @@
       .hero-greeting {
         font-size: 6rem; /* Default size */
         line-height: 1; /* Adjust line height to prevent overflow */
-        transition: transform 0.2s ease-out; /* Smooth transition for scroll effect */
+        transition: transform 0.2s ease-out, opacity 0.5s ease-in-out; /* Smooth transition for scroll and opacity effect */
       }
 
       /* Responsive adjustments for smaller screens */
@@ -221,57 +224,13 @@
         }
       }
 
-      @media (max-width: 768px) {
-        .glass-card {
-          flex-direction: column; /* Stack content vertically on small screens */
-          align-items: center;
-          text-align: center;
+      /* Keyframe animation for rainbow glow */
+      @keyframes rainbowGlow {
+        0% {
+          background-position: 0% 50%; /* Start at the beginning of the gradient */
         }
-
-        .glass-card img {
-          margin-bottom: 1rem; /* Add space below image */
-        }
-
-        .gradient-name {
-          font-size: 2.5rem; /* Adjust font size for smaller screens */
-        }
-
-        .md\:grid-cols-4 {
-          grid-template-columns: 1fr; /* Single column layout on mobile */
-        }
-
-        .md\:col-span-4 {
-          grid-column: span 1;
-        }
-
-        .hidden.md\:flex {
-          display: none; /* Hide navigation on small screens */
-        }
-
-        /* Further reduce padding for content within these cards if needed */
-        .glass-card .pt-8.pb-16 {
-          padding-top: 0.5rem; /* Further reduce top padding */
-          padding-bottom: 0.5rem; /* Further reduce bottom padding */
-        }
-        .glass-card .pt-12.pb-16 {
-          padding-top: 0.5rem; /* Further reduce top padding for Socials */
-          padding-bottom: 0.5rem; /* Further reduce bottom padding for Socials */
-        }
-
-        /* Adjust button position and size for small screens */
-        .glass-arrow-element {
-            bottom: 0.5rem; /* Adjusted for smaller screens */
-            right: 1rem;
-            padding: 0.3rem; /* Adjusted padding for smaller element */
-        }
-        .glass-arrow-element svg {
-            width: 1.5rem; /* Smaller width */
-            height: 1.5rem; /* Smaller height */
-        }
-
-        /* Responsive adjustments for hero-greeting on smaller screens */
-        .hero-greeting {
-          font-size: 4rem; /* Adjust font size for smaller screens */
+        100% {
+          background-position: 100% 50%; /* End at the end of the gradient */
         }
       }
     </style>
@@ -280,7 +239,7 @@
   <body>
     <header class="mx-auto mt-1 mb-8 flex max-w-6xl items-center justify-between px-6 py-6 text-white">
       <h1 class="text-2xl font-bold">Fernando</h1>
-      <nav class="hidden space-x-6 md:flex">
+      <nav class="flex space-x-6">
         <a href="#" class="text-glow rounded-md px-4">Home</a>
         <a href="#" class="text-glow rounded-md px-4">About</a>
         <a href="#" class="text-glow rounded-md px-4">Works</a>
@@ -293,7 +252,7 @@
       Greetings!
     </h2>
 
-    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-16 pb-32 md:grid-cols-4">
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4">
       <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg hover:scale-105 col-span-1 md:col-span-2" style="min-height: 280px; animation-delay: 0.1s;">
         <img src="https://i.imgur.com/ohtb4tN.jpg" class="h-48 w-48 rounded-xl object-cover" alt="My photo" onerror="this.onerror=null;this.src='https://placehold.co/192x192/000000/FFFFFF?text=Photo';" />
         <div class="flex flex-col justify-center text-left">
@@ -425,7 +384,7 @@
           observer.observe(card);
         });
 
-        // Scroll effect for Greetings! text
+        // Scroll effect for Greetings! text (only translateX)
         window.addEventListener('scroll', () => {
           let scrollY = window.scrollY;
           let maxTranslate = 500; // Max pixels to move right
@@ -436,3 +395,4 @@
     </script>
   </body>
 </html>
+
