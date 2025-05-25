@@ -209,12 +209,18 @@
 
       /* Custom class for the massive "Greetings!" text */
       .hero-greeting {
-        font-size: 11vw; /* Make it scale with viewport width */
+        font-size: 6rem; /* Default size */
         line-height: 1; /* Adjust line height to prevent overflow */
         transition: transform 0.2s ease-out; /* Smooth transition for scroll effect */
       }
 
       /* Responsive adjustments for smaller screens */
+      @media (min-width: 768px) {
+        .hero-greeting {
+          font-size: 7rem; /* Larger on medium screens and up */
+        }
+      }
+
       @media (max-width: 768px) {
         .glass-card {
           flex-direction: column; /* Stack content vertically on small screens */
@@ -265,7 +271,7 @@
 
         /* Responsive adjustments for hero-greeting on smaller screens */
         .hero-greeting {
-          font-size: 10vw; /* Adjust font size for smaller screens */
+          font-size: 4rem; /* Adjust font size for smaller screens */
         }
       }
     </style>
@@ -283,10 +289,12 @@
       <button class="btn-glow transform transition-transform duration-300 hover:scale-105">Let’s talk</button>
     </header>
 
-    <h2 id="greetings-text" class="text-white text-center font-bold mb-4 mx-auto max-w-6xl px-6 flex items-start justify-center min-h-screen hero-greeting pt-16">Greetings!</h2>
+    <h2 id="greetings-text" class="text-white text-center font-bold mb-4 mx-auto max-w-6xl px-6 flex items-center justify-center py-24 hero-greeting relative">
+      Greetings!
+    </h2>
 
-    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pb-32 md:grid-cols-4">
-      <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg hover:scale-105" style="min-height: 280px; animation-delay: 0.1s; grid-column: span 2">
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-16 pb-32 md:grid-cols-4">
+      <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg hover:scale-105 col-span-1 md:col-span-2" style="min-height: 280px; animation-delay: 0.1s;">
         <img src="https://i.imgur.com/ohtb4tN.jpg" class="h-48 w-48 rounded-xl object-cover" alt="My photo" onerror="this.onerror=null;this.src='https://placehold.co/192x192/000000/FFFFFF?text=Photo';" />
         <div class="flex flex-col justify-center text-left">
           <p class="mb-1 text-lg text-gray-400">Marketer</p>
@@ -300,7 +308,7 @@
         </a>
       </div>
 
-      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105" style="grid-column: span 1; min-height: 160px">
+      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105 col-span-1" style="min-height: 160px">
         <div class="flex items-center justify-center pt-5 pb-16">
           <img src="https://imgur.com/RTlcYnw.png" alt="Signature" onerror="this.onerror=null;this.src='https://placehold.co/100x40/000000/FFFFFF?text=Signature';" />
         </div>
@@ -315,7 +323,7 @@
         </a>
       </div>
 
-      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105" style="min-height: 160px; animation-delay: 0.3s">
+      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105 col-span-1" style="min-height: 160px; animation-delay: 0.3s">
         <div class="flex items-center justify-center pt-8 pb-16">
           <img src="https://via.placeholder.com/180x100?text=Work+Sample" alt="Work Sample" onerror="this.onerror=null;this.src='https://placehold.co/180x100/000000/FFFFFF?text=Work+Sample';" />
         </div>
@@ -330,7 +338,7 @@
         </a>
       </div>
 
-      <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg hover:scale-105" style="animation-delay: 0.4s; min-height: 120px">
+      <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg hover:scale-105 col-span-1" style="animation-delay: 0.4s; min-height: 120px">
         <div class="flex items-center justify-center pt-3 pb-2">
           <img src="https://imgur.com/HYyoce4.png" class="h-20 w-20" alt="CV Icon" onerror="this.onerror=null;this.src='https://placehold.co/80x80/000000/FFFFFF?text=CV';" />
         </div>
@@ -345,7 +353,7 @@
         </a>
       </div>
 
-      <div class="glass-card relative col-span-2 flex flex-col justify-between p-10 shadow-lg hover:scale-105" style="min-height: 140px; animation-delay: 0.2s">
+      <div class="glass-card relative col-span-1 md:col-span-2 flex flex-col justify-between p-10 shadow-lg hover:scale-105" style="min-height: 140px; animation-delay: 0.2s">
         <div class="flex max-w-xl flex-wrap items-center justify-center gap-3 pt-1 pb-10">
           <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Image Editing</span>
           <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">SEO</span>
@@ -367,7 +375,7 @@
         </a>
       </div>
 
-      <div class="glass-card relative flex transform flex-col justify-between p-4 shadow-lg transition-transform duration-300 hover:scale-105" style="animation-delay: 0.5s; min-height: 120px">
+      <div class="glass-card relative flex transform flex-col justify-between p-4 shadow-lg transition-transform duration-300 hover:scale-105 col-span-1" style="animation-delay: 0.5s; min-height: 120px">
         <div class="flex items-center justify-center gap-4 pt-6 pb-4">
           <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110">
             <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" class="h-14 w-14" alt="Instagram" onerror="this.onerror=null;this.src='https://placehold.co/56x56/000000/FFFFFF?text=IG';" />
