@@ -207,27 +207,10 @@
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); /* Stronger glow on hover */
       }
 
-      @keyframes popup {
-        0% {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      @keyframes rainbowGlow {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+      /* Custom class for the massive "Greetings!" text */
+      .hero-greeting {
+        font-size: 10vw; /* Make it scale with viewport width */
+        line-height: 1; /* Adjust line height to prevent overflow */
       }
 
       /* Responsive adjustments for smaller screens */
@@ -278,6 +261,11 @@
             width: 1.5rem; /* Smaller width */
             height: 1.5rem; /* Smaller height */
         }
+
+        /* Responsive adjustments for hero-greeting on smaller screens */
+        .hero-greeting {
+          font-size: 10vw; /* Adjust font size for smaller screens */
+        }
       }
     </style>
   </head>
@@ -294,9 +282,9 @@
       <button class="btn-glow transform transition-transform duration-300 hover:scale-105">Let’s talk</button>
     </header>
 
-    <h2 class="text-white text-right text-9xl font-bold mt-10 mb-4 mx-auto max-w-6xl px-6">Greetings!</h2>
+    <h2 class="text-white text-right font-bold mb-4 mx-auto max-w-6xl px-6 flex items-center justify-end min-h-screen hero-greeting">Greetings!</h2>
 
-    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-16 pb-32 md:grid-cols-4">
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pb-32 md:grid-cols-4">
       <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg hover:scale-105" style="min-height: 280px; animation-delay: 0.1s; grid-column: span 2">
         <img src="https://i.imgur.com/ohtb4tN.jpg" class="h-48 w-48 rounded-xl object-cover" alt="My photo" onerror="this.onerror=null;this.src='https://placehold.co/192x192/000000/FFFFFF?text=Photo';" />
         <div class="flex flex-col justify-center text-left">
