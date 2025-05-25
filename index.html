@@ -1,14 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modern Dev Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body {
-        background-color: #0f0f0f;
+        background-color: #0f0f0f; /* Primary dark background */
+        /* Aesthetic background with a smooth, subtle gradient similar to Apple Mac backgrounds */
+        background-image: linear-gradient(
+          135deg,
+          #1a1a1a 0%,
+          #0a0a0a 50%,
+          #1a1a1a 100%
+        ); /* Dark, sophisticated gradient */
+        background-size: cover; /* Ensure it covers the entire body */
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Keep background fixed while scrolling */
+        font-family: "Inter", sans-serif; /* Using Inter font */
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
-
 
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
@@ -23,10 +37,17 @@
         overflow: hidden;
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         z-index: 0;
+        /* Initial state for scroll animation */
         opacity: 0;
-        transform: scale(0.95);
-        animation: popup 0.5s forwards;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
+
+      .glass-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       .glass-card::before {
         content: "";
         position: absolute;
@@ -46,22 +67,20 @@
         opacity: 0.5;
         z-index: 1;
       }
-.gradient-name {
-  font-size: 3rem; /* Adjust size as needed */
-  font-weight: 800;
-  background: linear-gradient(180deg, #d4d4d4, #8a8a8a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.5;
- 
-}
+      .gradient-name {
+        font-size: 3rem; /* Adjust size as needed */
+        font-weight: 800;
+        background: linear-gradient(180deg, #d4d4d4, #8a8a8a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 0.9;
+      }
       .glass-card:hover {
         box-shadow:
           0 8px 30px rgba(255, 255, 255, 0.15),
           inset 0 0 30px rgba(255, 255, 255, 0.06);
         transform: scale(1.03);
       }
-
 
       .glass-card::after {
         content: "";
@@ -92,11 +111,9 @@
         animation: rainbowGlow 5s linear infinite;
       }
 
-
       .glass-card:hover::after {
         opacity: 1;
       }
-
 
       .text-glow {
         position: relative;
@@ -106,14 +123,12 @@
         transition: color 0.3s ease, text-shadow 0.3s ease;
       }
 
-
       .text-glow:hover {
         color: #ffffff;
         text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
       }
 
-
-      /* Permanent glowing border on the button edges only */
+      /* Navbar Button: Permanent glowing border on the button edges only */
       .btn-glow {
         position: relative;
         border-radius: 0.75rem;
@@ -126,7 +141,6 @@
         border: 1px solid transparent;
         transition: color 0.3s ease;
       }
-
 
       .btn-glow::after {
         content: "";
@@ -156,11 +170,42 @@
         opacity: 1;
       }
 
-
       .btn-glow:hover {
         color: #fff;
       }
 
+      /* Style for elegant arrow element inside glass cards */
+      .glass-arrow-element {
+        position: absolute;
+        bottom: 0.75rem; /* Adjusted to bring it further down */
+        right: 1.5rem; /* Equivalent to right-6 */
+        background: transparent; /* No background */
+        border: none; /* No border */
+        padding: 0.5rem; /* Padding around the SVG for clickable area */
+        color: white; /* Color of the SVG */
+        transition: transform 0.3s ease, filter 0.3s ease; /* Transition for lift and glow */
+        z-index: 2; /* Ensure it's above other elements if needed */
+        text-decoration: none; /* Remove underline for links */
+        display: inline-flex; /* For proper alignment of SVG */
+        align-items: center;
+        justify-content: center;
+        cursor: pointer; /* Indicate it's clickable */
+      }
+
+      .glass-arrow-element svg {
+        width: 2rem; /* Slightly larger size for the SVG */
+        height: 2rem; /* Slightly larger size for the SVG */
+        fill: currentColor; /* Use the element's text color for the SVG */
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)); /* Initial subtle glow */
+      }
+
+      .glass-arrow-element:hover {
+        transform: translateX(5px); /* Move right on hover */
+      }
+
+      .glass-arrow-element:hover svg {
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); /* Stronger glow on hover */
+      }
 
       @keyframes popup {
         0% {
@@ -173,7 +218,6 @@
         }
       }
 
-
       @keyframes rainbowGlow {
         0% {
           background-position: 0% 50%;
@@ -185,134 +229,204 @@
           background-position: 0% 50%;
         }
       }
+
+      /* Responsive adjustments for smaller screens */
+      @media (max-width: 768px) {
+        .glass-card {
+          flex-direction: column; /* Stack content vertically on small screens */
+          align-items: center;
+          text-align: center;
+        }
+
+        .glass-card img {
+          margin-bottom: 1rem; /* Add space below image */
+        }
+
+        .gradient-name {
+          font-size: 2.5rem; /* Adjust font size for smaller screens */
+        }
+
+        .md\:grid-cols-4 {
+          grid-template-columns: 1fr; /* Single column layout on mobile */
+        }
+
+        .md\:col-span-4 {
+          grid-column: span 1;
+        }
+
+        .hidden.md\:flex {
+          display: none; /* Hide navigation on small screens */
+        }
+
+        /* Further reduce padding for content within these cards if needed */
+        .glass-card .pt-8.pb-16 {
+          padding-top: 0.5rem; /* Further reduce top padding */
+          padding-bottom: 0.5rem; /* Further reduce bottom padding */
+        }
+        .glass-card .pt-12.pb-16 {
+          padding-top: 0.5rem; /* Further reduce top padding for Socials */
+          padding-bottom: 0.5rem; /* Further reduce bottom padding for Socials */
+        }
+
+        /* Adjust button position and size for small screens */
+        .glass-arrow-element {
+            bottom: 0.5rem; /* Adjusted for smaller screens */
+            right: 1rem;
+            padding: 0.3rem; /* Adjusted padding for smaller element */
+        }
+        .glass-arrow-element svg {
+            width: 1.5rem; /* Smaller width */
+            height: 1.5rem; /* Smaller height */
+        }
+      }
     </style>
   </head>
 
-
   <body>
-    <!-- Navbar -->
-    <header
-      class="max-w-6xl mx-auto flex justify-between items-center px-6 py-6 mt-1 mb-8 text-white"
-    >
+    <header class="mx-auto mt-1 mb-8 flex max-w-6xl items-center justify-between px-6 py-6 text-white">
       <h1 class="text-2xl font-bold">Fernando</h1>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#" class="text-glow px- rounded-md">Home</a>
-        <a href="#" class="text-glow px-4 rounded-md">About</a>
-        <a href="#" class="text-glow px-4 rounded-md">Works</a>
-        <a href="#" class="text-glow px-4 rounded-md">Contact</a>
+      <nav class="hidden space-x-6 md:flex">
+        <a href="#" class="text-glow rounded-md px-4">Home</a>
+        <a href="#" class="text-glow rounded-md px-4">About</a>
+        <a href="#" class="text-glow rounded-md px-4">Works</a>
+        <a href="#" class="text-glow rounded-md px-4">Contact</a>
       </nav>
-      <button
-      class="btn-glow transform transition-transform duration-300 hover:scale-105"
-
-
-      >
-        Let’s talk
-      </button>
+      <button class="btn-glow transform transition-transform duration-300 hover:scale-105">Let’s talk</button>
     </header>
 
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4">
+      <h2 class="text-white text-right text-7xl font-bold mb-4 md:col-span-4">Greetings!</h2>
 
-    <!-- Grid Layout -->
-    <section
-      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 px-6 pb- "
-    >
-      <!-- Profile Card -->
-      <div
-        class="glass-card p-6 flex flex-row items-center gap-6 shadow-lg col-span-1 md:col-span-2 hover:scale-105"
-        style="min-height: 270px; animation-delay: 0.1s"
-      >
-        <img
-          src="https://i.imgur.com/ohtb4tN.jpg"
-          class="rounded-xl w-48 h-48 object-cover"
-          alt="My photo"
-        />
-        <div class="flex flex-col justify-center self-center">
-          <p class="text-lg text-gray-400 mb-1">Marketer</p>
-          <h2 class="gradient-name mt-2 mb-1 md:mt- md:mb-2">Shunsuke Fernando</h2>
-          <p class="text-gray-400 text-shadow-md mt-1 max-w-md">
-            I am a Marketing Graduate from Cainta Rizal.
-          </p>
+      <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg hover:scale-105" style="min-height: 280px; animation-delay: 0.1s; grid-column: span 2">
+        <img src="https://i.imgur.com/ohtb4tN.jpg" class="h-48 w-48 rounded-xl object-cover" alt="My photo" onerror="this.onerror=null;this.src='https://placehold.co/192x192/000000/FFFFFF?text=Photo';" />
+        <div class="flex flex-col justify-center text-left">
+          <p class="mb-1 text-lg text-gray-400">Marketer</p>
+          <h2 class="gradient-name md:mt- mt-2 mb-1 md:mb-2">Shunsuke Fernando</h2>
+          <p class="max-w-md text-gray-400 text-shadow-md text-xs">I am a Marketing Graduate from Cainta Rizal.</p>
         </div>
+        <a href="#" class="glass-arrow-element" aria-label="View Profile">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
       </div>
 
-
-      <!-- Credentials Card -->
-      <div
-        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg hover:scale-105"
-        style="min-height: 270px; animation-delay: 0.2s"
-      >
-        <img src="https://via.placeholder.com/100x40?text=Signature" class="mb-4" />
-        <p class="text-sm text-gray-400">More About Me</p>
-        <h3 class="text-xl font-semibold text-white">Credentials</h3>
+      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105" style="grid-column: span 1; min-height: 160px">
+        <div class="flex items-center justify-center pt-5 pb-16">
+          <img src="https://imgur.com/RTlcYnw.png" alt="Signature" onerror="this.onerror=null;this.src='https://placehold.co/100x40/000000/FFFFFF?text=Signature';" />
+        </div>
+        <div class="absolute bottom-6 left-6">
+          <p class="text-sm text-gray-400">More About Me</p>
+          <h3 class="text-xl font-semibold text-white">Credentials</h3>
+        </div>
+        <a href="#" class="glass-arrow-element" aria-label="View Credentials">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
       </div>
 
-
-      <!-- Portfolio Card -->
-      <div
-        class="glass-card p-6 flex flex-col justify-center items-center shadow-lg hover:scale-105"
-        style="min-height: 270px; animation-delay: 0.3s"
-      >
-        <img src="https://via.placeholder.com/180x100?text=Work+Sample" class="mb-4" />
-        <p class="text-sm text-gray-400">Showcase</p>
-        <h3 class="text-xl font-semibold text-white">Portfolios</h3>
+      <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg hover:scale-105" style="min-height: 160px; animation-delay: 0.3s">
+        <div class="flex items-center justify-center pt-8 pb-16">
+          <img src="https://via.placeholder.com/180x100?text=Work+Sample" alt="Work Sample" onerror="this.onerror=null;this.src='https://placehold.co/180x100/000000/FFFFFF?text=Work+Sample';" />
+        </div>
+        <div class="absolute bottom-6 left-6">
+          <p class="text-sm text-gray-400">Showcase</p>
+          <h3 class="text-xl font-semibold text-white">Portfolio</h3>
+        </div>
+        <a href="#" class="glass-arrow-element" aria-label="View Portfolio">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
       </div>
 
-
-      <!-- Download CV -->
-      <div
-        class="glass-card p-6 text-center flex flex-col justify-center items-center shadow-lg hover:scale-105"
-        style="animation-delay: 0.4s"
-      >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2195/2195529.png"
-          class="w-20 h-20 mb-4"
-          alt="CV Icon"
-        />
-        <p class="text-sm text-gray-400">My CV</p>
-        <h3 class="text-xl font-semibold text-white">Download</h3>
+      <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg hover:scale-105" style="animation-delay: 0.4s; min-height: 120px">
+        <div class="flex items-center justify-center pt-3 pb-2">
+          <img src="https://imgur.com/HYyoce4.png" class="h-20 w-20" alt="CV Icon" onerror="this.onerror=null;this.src='https://placehold.co/80x80/000000/FFFFFF?text=CV';" />
+        </div>
+        <div class="absolute bottom-4 left-4">
+          <p class="text-sm text-gray-400">My CV</p>
+          <h3 class="text-lg font-semibold text-white">Download</h3>
+        </div>
+        <a href="#" class="glass-arrow-element" aria-label="Download CV">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
       </div>
 
+      <div class="glass-card relative col-span-2 flex flex-col justify-between p-10 shadow-lg hover:scale-105" style="min-height: 140px; animation-delay: 0.2s">
+        <div class="flex max-w-xl flex-wrap items-center justify-center gap-3 pt-1 pb-10">
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Image Editing</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">SEO</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Digital Marketing</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Photoshop</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Content Creating</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">Website Designing</span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">...</span>
+        </div>
 
-      <!-- Social Links -->
-      <div
-        class="glass-card p-6 flex flex-col justify-center items-center gap-4 shadow-lg transform transition-transform duration-300 hover:scale-105"
-        style="animation-delay: 0.5s"
-      >
-        <div class="flex gap-6">
-          <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            class="hover:scale-110 transition"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-              class="w-18 h-18"
-              alt="Instagram"
-            />
+        <div class="absolute bottom-4 left-4">
+          <p class="text-sm text-gray-400">More About Me</p>
+          <h3 class="text-lg font-semibold text-white">Specializations</h3>
+        </div>
+        <a href="#" class="glass-arrow-element" aria-label="View All Specializations">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
+      </div>
+
+      <div class="glass-card relative flex transform flex-col justify-between p-4 shadow-lg transition-transform duration-300 hover:scale-105" style="animation-delay: 0.5s; min-height: 120px">
+        <div class="flex items-center justify-center gap-4 pt-6 pb-4">
+          <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" class="h-14 w-14" alt="Instagram" onerror="this.onerror=null;this.src='https://placehold.co/56x56/000000/FFFFFF?text=IG';" />
           </a>
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            class="hover:scale-110 transition"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-              class="w-18 h-18"
-              alt="LinkedIn"
-            />
+          <a href="https://www.linkedin.com/" target="_blank" class="transition hover:scale-110">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="h-14 w-14" alt="LinkedIn" onerror="this.onerror=null;this.src='https://placehold.co/56x56/000000/FFFFFF?text=LI';" />
           </a>
         </div>
-        <p class="text-xl font-semibold text-white">Socials</p>
+        <div class="absolute bottom-4 left-4">
+          <p class="text-sm text-gray-400">Let's Connect</p>
+          <h3 class="text-lg font-semibold text-white">Socials</h3>
+        </div>
+        <a href="#" class="glass-arrow-element" aria-label="Connect on Socials">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </a>
       </div>
     </section>
 
-
-    <footer
-      class="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white select-none pointer-events-none"
-    >
+    <footer class="fixed bottom-0 left-1/2 flex -translate-x-1/2 transform flex-col items-center text-white">
       <span class="text-xl font-bold">Fernando</span>
-      <span class="text-sm text-gray-400 mt-1">
-        Made by Shunsuke Fernando on GitHub
-      </span>
+      <span class="mt-1 text-sm text-gray-400"> Made by Shunsuke Fernando on GitHub </span>
     </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const glassCards = document.querySelectorAll('.glass-card');
+
+        const observerOptions = {
+          root: null, /* viewport */
+          rootMargin: '0px',
+          threshold: 0.1 /* 10% of the element must be visible */
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target); /* Stop observing once animated */
+            }
+          });
+        }, observerOptions);
+
+        glassCards.forEach(card => {
+          observer.observe(card);
+        });
+      });
+    </script>
   </body>
 </html>
