@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
       /* Smooth scroll behavior for all elements */
       * {
@@ -246,14 +246,22 @@
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
       }
 
-      /* Hero greeting text styling */
+      /* Hero greeting text styling (also applied to profile heading for consistent font) */
       .hero-greeting {
-        font-size: clamp(7rem, 12vw, 6rem);
+        font-size: clamp(9rem, 16vw, 8rem); /* Made larger */
         line-height: 1;
-        /* Reverted to only horizontal movement for Greetings */
         transition: transform 0.2s ease-out, opacity 0.5s ease-in-out;
-        font-weight: 900;
-        letter-spacing: -0.05em;
+        font-weight: 300; /* Thicker font for elegance (font-weight: 300 is light) */
+        letter-spacing: 0.02em; /* Slightly wider spacing for elegance */
+        position: relative; /* Added for pseudo-element positioning */
+        opacity: 0; /* Hidden by default for entrance animation */
+        transform: translateY(50px); /* Slide up animation */
+      }
+
+      /* Class to make hero greetings visible */
+      .hero-greeting.is-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* Keyframe animation for rainbow glow */
@@ -455,14 +463,14 @@
 
     <main>
       <section id="home" class="flex items-center justify-center min-h-screen px-6">
-        <h2 id="greetings-text" class="text-white text-center font-bold hero-greeting">
+        <h2 id="greetings-text" class="text-white text-center hero-greeting">
           Greetings!
         </h2>
       </section>
 
       <section id="about" class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4">
-        <h2 id="profile-heading" class="col-span-full text-right text-4xl md:text-5xl font-bold mb-16 mt-8 about-heading-gradient hero-greeting">
-          My Professional <strong>Profile</strong>
+        <h2 id="profile-heading" class="col-span-full text-center text-4xl md:text-5xl mb-16 mt-8 about-heading-gradient hero-greeting">
+          My Professional Profile
         </h2>
 
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2" style="min-height: 280px; animation-delay: 0.1s;">
@@ -598,18 +606,14 @@
         const navbar = document.querySelector('.navbar');
 
         // Constants for scroll effects
-        // For Greetings text (simpler horizontal movement)
-        const MAX_GREETINGS_TRANSLATE_X = 500;
-        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 800;
+        // For Greetings text (horizontal movement to the right)
+        const MAX_GREETINGS_TRANSLATE_X = 150; // Less aggressive slide right
+        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 1200; // Slower fade
 
-        // For Profile Heading (same horizontal movement as greetings, but to the left)
-        const MAX_PROFILE_TRANSLATE_X = 500; // Max distance to move left
-        const PROFILE_OPACITY_FADE_SCROLL_THRESHOLD = 800; // Same as greetings for consistent effect
-
-        // Intersection Observer to animate glass cards into view
+        // Intersection Observer to animate glass cards and hero headings into view
         const observerOptions = {
           root: null, // relative to the viewport
-          rootMargin: '0px 0px -10% 0px', // Trigger when 10% of the card is visible from the bottom
+          rootMargin: '0px 0px -10% 0px', // Trigger when 10% of the element is visible from the bottom
           threshold: 0.1 // Trigger when 10% of the target is visible
         };
 
@@ -622,10 +626,12 @@
           });
         }, observerOptions);
 
-        // Observe each glass card
+        // Observe each glass card and the hero headings
         glassCards.forEach(card => {
           observer.observe(card);
         });
+        observer.observe(greetingsText); // Observe Greetings for entrance
+        observer.observe(profileHeading); // Observe Profile Heading for entrance
 
         // Enhanced scroll effects with throttling
         let ticking = false;
@@ -640,25 +646,14 @@
             navbar.classList.remove('scrolled');
           }
 
-          // Greetings text effect: horizontal translation and fade
+          // Greetings text effect: horizontal translation to the right and fade
           const greetingsTranslateX = Math.min(scrollY, MAX_GREETINGS_TRANSLATE_X);
           const greetingsOpacity = Math.max(1 - (scrollY / GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD), 0);
           greetingsText.style.transform = `translateX(${greetingsTranslateX}px)`;
           greetingsText.style.opacity = greetingsOpacity;
 
-          // Profile Heading effect: horizontal translation to the left and fade
-          // The effect for profile heading should start after the greetings section is mostly scrolled past.
-          const profileEffectStartScroll = window.innerHeight * 0.8; // Adjust this value as needed
-          const profileScrollProgress = Math.max(0, scrollY - profileEffectStartScroll);
-
-          // Calculate horizontal translation for profile heading (moving left)
-          // Since it's right-aligned, a negative translateX will move it left.
-          const profileTranslateX = -Math.min(profileScrollProgress, MAX_PROFILE_TRANSLATE_X);
-          const profileOpacity = Math.max(1 - (profileScrollProgress / PROFILE_OPACITY_FADE_SCROLL_THRESHOLD), 0);
-
-          profileHeading.style.transform = `translateX(${profileTranslateX}px)`;
-          profileHeading.style.opacity = profileOpacity;
-
+          // Profile Heading effect: This is now handled by the IntersectionObserver
+          // and the .hero-greeting.is-visible class, so no direct scroll manipulation here.
 
           ticking = false; // Reset ticking flag
         }
