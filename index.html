@@ -246,20 +246,30 @@
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
       }
 
-      /* Hero greeting text styling (also applied to profile heading for consistent font) */
-      .hero-greeting {
-        font-size: clamp(9rem, 16vw, 8rem); /* Made larger */
+      /* Hero greeting text styling */
+      #greetings-text {
+        font-size: clamp(7rem, 12vw, 6rem); /* Reverted to earlier size */
         line-height: 1;
-        transition: transform 0.2s ease-out, opacity 0.5s ease-in-out;
-        font-weight: 300; /* Thicker font for elegance (font-weight: 300 is light) */
+        font-weight: 200; /* Thin font for elegance */
         letter-spacing: 0.02em; /* Slightly wider spacing for elegance */
-        position: relative; /* Added for pseudo-element positioning */
-        opacity: 0; /* Hidden by default for entrance animation */
-        transform: translateY(50px); /* Slide up animation */
+        position: relative;
+        /* No initial opacity or transform here, handled by JS scroll effect */
+        transition: transform 0.2s ease-out, opacity 0.5s ease-in-out; /* Keep transition for smooth scroll effect */
       }
 
-      /* Class to make hero greetings visible */
-      .hero-greeting.is-visible {
+      /* My Professional Profile specific styling */
+      #profile-heading {
+        font-size: clamp(6.5rem, 11vw, 5.5rem); /* Made a little smaller */
+        font-weight: 300; /* Thicker font as requested */
+        line-height: 1;
+        letter-spacing: 0.02em;
+        position: relative;
+        /* No initial opacity or transform here, making it visible by default */
+        /* No transition here as it's not being animated by JS anymore */
+      }
+
+      /* Class to make elements visible (used by IntersectionObserver for glass cards) */
+      .is-visible {
         opacity: 1;
         transform: translateY(0);
       }
@@ -345,8 +355,12 @@
 
       /* Mobile responsiveness improvements */
       @media (max-width: 768px) {
-        .hero-greeting {
+        #greetings-text {
           font-size: 4rem;
+        }
+
+        #profile-heading {
+          font-size: 4rem; /* Adjust for mobile, slightly smaller than greetings */
         }
 
         .glass-card {
@@ -463,13 +477,13 @@
 
     <main>
       <section id="home" class="flex items-center justify-center min-h-screen px-6">
-        <h2 id="greetings-text" class="text-white text-center hero-greeting">
+        <h2 id="greetings-text" class="text-white text-center">
           Greetings!
         </h2>
       </section>
 
       <section id="about" class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4">
-        <h2 id="profile-heading" class="col-span-full text-center text-4xl md:text-5xl mb-16 mt-8 about-heading-gradient hero-greeting">
+        <h2 id="profile-heading" class="col-span-full text-center mb-16 mt-8 about-heading-gradient">
           My Professional Profile
         </h2>
 
@@ -601,16 +615,16 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const greetingsText = document.getElementById('greetings-text');
-        const profileHeading = document.getElementById('profile-heading');
+        const profileHeading = document.getElementById('profile-heading'); // Kept for reference, but not observed for entrance
         const glassCards = document.querySelectorAll('.glass-card');
         const navbar = document.querySelector('.navbar');
 
         // Constants for scroll effects
         // For Greetings text (horizontal movement to the right)
-        const MAX_GREETINGS_TRANSLATE_X = 150; // Less aggressive slide right
-        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 1200; // Slower fade
+        const MAX_GREETINGS_TRANSLATE_X = 1000; // Increased for dramatic slide right
+        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 2000; // Increased for slower fade
 
-        // Intersection Observer to animate glass cards and hero headings into view
+        // Intersection Observer to animate glass cards into view
         const observerOptions = {
           root: null, // relative to the viewport
           rootMargin: '0px 0px -10% 0px', // Trigger when 10% of the element is visible from the bottom
@@ -626,12 +640,10 @@
           });
         }, observerOptions);
 
-        // Observe each glass card and the hero headings
+        // Observe each glass card for entrance animation
         glassCards.forEach(card => {
           observer.observe(card);
         });
-        observer.observe(greetingsText); // Observe Greetings for entrance
-        observer.observe(profileHeading); // Observe Profile Heading for entrance
 
         // Enhanced scroll effects with throttling
         let ticking = false;
@@ -647,13 +659,11 @@
           }
 
           // Greetings text effect: horizontal translation to the right and fade
+          // This effect is applied directly based on scrollY
           const greetingsTranslateX = Math.min(scrollY, MAX_GREETINGS_TRANSLATE_X);
           const greetingsOpacity = Math.max(1 - (scrollY / GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD), 0);
           greetingsText.style.transform = `translateX(${greetingsTranslateX}px)`;
           greetingsText.style.opacity = greetingsOpacity;
-
-          // Profile Heading effect: This is now handled by the IntersectionObserver
-          // and the .hero-greeting.is-visible class, so no direct scroll manipulation here.
 
           ticking = false; // Reset ticking flag
         }
