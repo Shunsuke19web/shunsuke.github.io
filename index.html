@@ -3,16 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Dev Portfolio</title>
+    <title>Shunsuke's Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+      /* Smooth scroll behavior for all elements */
       * {
         scroll-behavior: smooth;
       }
 
+      /* Body styling for dark background and gradient */
       body {
         background-color: #0f0f0f;
         background-image: linear-gradient(
@@ -27,11 +29,12 @@
         font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
 
+      /* Glassmorphism card styling */
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
         border-radius: 1.5rem;
@@ -45,15 +48,17 @@
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         z-index: 0;
-        opacity: 0;
-        transform: translateY(50px);
+        opacity: 0; /* Hidden by default for JS animation */
+        transform: translateY(50px); /* Slide up animation */
       }
 
+      /* Class to make glass cards visible */
       .glass-card.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
 
+      /* Inner glow effect for glass cards */
       .glass-card::before {
         content: "";
         position: absolute;
@@ -74,6 +79,7 @@
         z-index: 1;
       }
 
+      /* Gradient text for the name */
       .gradient-name {
         font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 800;
@@ -85,6 +91,7 @@
         letter-spacing: -0.02em;
       }
 
+      /* Hover effects for glass cards */
       .glass-card:hover {
         box-shadow:
           0 8px 30px rgba(255, 255, 255, 0.15),
@@ -94,6 +101,7 @@
         border-color: rgba(255, 255, 255, 0.18);
       }
 
+      /* Rainbow border glow effect for glass cards on hover */
       .glass-card::after {
         content: "";
         position: absolute;
@@ -102,7 +110,7 @@
         right: 0;
         bottom: 0;
         border-radius: inherit;
-        padding: 3px;
+        padding: 3px; /* Creates the border effect */
         background: linear-gradient(
           270deg,
           #f70157,
@@ -117,16 +125,18 @@
           linear-gradient(#fff 0 0);
         mask-composite: xor;
         -webkit-mask-composite: destination-out;
-        opacity: 0;
+        opacity: 0; /* Hidden by default */
         transition: opacity 0.4s ease;
         z-index: -1;
-        animation: rainbowGlow 5s linear infinite;
+        animation: rainbowGlow 5s linear infinite; /* Continuous animation */
       }
 
+      /* Show rainbow glow on hover */
       .glass-card:hover::after {
         opacity: 1;
       }
 
+      /* Text glow effect for navigation links */
       .text-glow {
         position: relative;
         border-radius: 0.75rem;
@@ -136,12 +146,14 @@
         padding: 0.5rem 1rem;
       }
 
+      /* Text glow hover effects */
       .text-glow:hover {
         color: #ffffff;
         text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
         background: rgba(255, 255, 255, 0.05);
       }
 
+      /* Button glow effect styling */
       .btn-glow {
         position: relative;
         border-radius: 0.75rem;
@@ -161,6 +173,7 @@
         font-size: 0.95rem;
       }
 
+      /* Rainbow border glow for buttons */
       .btn-glow::after {
         content: "";
         position: absolute;
@@ -190,12 +203,14 @@
         animation: rainbowGlow 20s linear infinite;
       }
 
+      /* Button hover effects */
       .btn-glow:hover {
         color: #fff;
         transform: scale(1.05);
         background-color: #2c2c2c;
       }
 
+      /* Styling for arrow elements on glass cards */
       .glass-arrow-element {
         position: absolute;
         bottom: 0.75rem;
@@ -213,6 +228,7 @@
         cursor: pointer;
       }
 
+      /* SVG icon within arrow element */
       .glass-arrow-element svg {
         width: 2rem;
         height: 2rem;
@@ -221,6 +237,7 @@
         transition: all 0.3s ease;
       }
 
+      /* Arrow element hover effects */
       .glass-arrow-element:hover {
         transform: translateX(5px);
       }
@@ -229,14 +246,17 @@
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
       }
 
+      /* Hero greeting text styling */
       .hero-greeting {
         font-size: clamp(7rem, 12vw, 6rem);
         line-height: 1;
+        /* Reverted to only horizontal movement for Greetings */
         transition: transform 0.2s ease-out, opacity 0.5s ease-in-out;
         font-weight: 900;
         letter-spacing: -0.05em;
       }
 
+      /* Keyframe animation for rainbow glow */
       @keyframes rainbowGlow {
         0% {
           background-position: 0% 50%;
@@ -255,6 +275,7 @@
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
 
+      /* Navbar styling when scrolled */
       .navbar.scrolled {
         background: #0f0f0f; /* Fully opaque background */
         backdrop-filter: none; /* Remove blur when scrolled */
@@ -276,6 +297,7 @@
         cursor: pointer;
       }
 
+      /* Skill tag hover effects */
       .skill-tag:hover {
         background: rgba(255, 255, 255, 0.15);
         border-color: rgba(255, 255, 255, 0.25);
@@ -283,7 +305,7 @@
         box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
       }
 
-      /* Improved profile image */
+      /* Improved profile image styling */
       .profile-image {
         border-radius: 1.5rem;
         object-fit: cover;
@@ -291,6 +313,7 @@
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       }
 
+      /* Profile image hover effects */
       .profile-image:hover {
         transform: scale(1.05);
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -305,6 +328,7 @@
         filter: brightness(0.9);
       }
 
+      /* Social icon hover effects */
       .social-icon:hover {
         transform: translateY(-4px) scale(1.1);
         filter: brightness(1.1);
@@ -321,7 +345,7 @@
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding: 1.5rem !important;
+          padding: 1.5rem !important; /* Adjust padding for mobile */
         }
 
         .glass-card img {
@@ -332,6 +356,7 @@
           font-size: 2.5rem;
         }
 
+        /* Adjust grid columns for mobile */
         .grid-cols-1.md\:grid-cols-4 {
           grid-template-columns: 1fr;
         }
@@ -344,6 +369,7 @@
           display: none;
         }
 
+        /* Adjust arrow elements for mobile */
         .glass-arrow-element {
           bottom: 0.5rem;
           right: 1rem;
@@ -355,28 +381,32 @@
           height: 1.5rem;
         }
 
+        /* Adjust navbar for mobile */
         .navbar {
           margin: 0.5rem;
           width: calc(100% - 1rem);
         }
 
+        /* Adjust skill tags for mobile */
         .skill-tag {
           font-size: 0.75rem;
           padding: 0.4rem 0.8rem;
         }
 
+        /* Adjust profile image for mobile */
         .profile-image {
           width: 8rem !important;
           height: 8rem !important;
         }
 
+        /* Adjust social icons for mobile */
         .social-icon {
-          width: 3rem; /* Adjusted for mobile */
-          height: 3rem; /* Adjusted for mobile */
+          width: 3rem;
+          height: 3rem;
         }
       }
 
-      /* Performance optimization */
+      /* Performance optimization for reduced motion preference */
       @media (prefers-reduced-motion: reduce) {
         * {
           animation-duration: 0.01ms !important;
@@ -391,6 +421,15 @@
       .text-glow:focus {
         outline: 2px solid rgba(255, 255, 255, 0.5);
         outline-offset: 2px;
+      }
+
+      /* Custom style for the gradient heading, using colors from your image */
+      .about-heading-gradient {
+        background-image: linear-gradient(90deg, #FF69B4, #87CEEB, #9370DB); /* Soft pink, sky blue, medium purple */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; /* Fallback for non-webkit browsers */
       }
     </style>
   </head>
@@ -422,17 +461,21 @@
       </section>
 
       <section id="about" class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4">
+        <h2 id="profile-heading" class="col-span-full text-right text-4xl md:text-5xl font-bold mb-16 mt-8 about-heading-gradient hero-greeting">
+          My Professional <strong>Profile</strong>
+        </h2>
+
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2" style="min-height: 280px; animation-delay: 0.1s;">
           <img src="https://i.imgur.com/ohtb4tN.jpg"
                class="profile-image h-48 w-48"
-               alt="Shunsuke Fernando"
+               alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
                onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';" />
           <div class="flex flex-col justify-center text-left">
             <p class="mb-1 text-lg text-gray-400">Marketer</p>
             <h2 class="gradient-name mt-2 mb-1 md:mb-2">Shunsuke Fernando</h2>
             <p class="max-w-md text-gray-400 text-xs leading-relaxed">I am a Marketing Graduate from Cainta Rizal, passionate about digital innovation and creative solutions.</p>
           </div>
-          <a href="#" class="glass-arrow-element" aria-label="View Profile">
+          <a href="#about" class="glass-arrow-element" aria-label="View Profile details">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -442,13 +485,13 @@
         <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg col-span-1" style="min-height: 160px; animation-delay: 0.2s;">
           <div class="flex items-center justify-center pt-8 pb-12">
             <img src="https://imgur.com/RTlcYnw.png"
-                  alt="Signature"
+                  alt="Shunsuke Fernando's signature"
                   class="max-w-[200px] h-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/cccccc/000000?text=Signature';" /> </div>
           <div class="absolute bottom-6 left-6">
             <p class="text-sm text-gray-400">More About Me</p>
             <h3 class="text-xl font-semibold text-white">Credentials</h3>
           </div>
-          <a href="#" class="glass-arrow-element" aria-label="View Credentials">
+          <a href="#about" class="glass-arrow-element" aria-label="View Credentials">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -467,7 +510,7 @@
             <p class="text-sm text-gray-400">Showcase</p>
             <h3 class="text-xl font-semibold text-white">Portfolio</h3>
           </div>
-          <a href="#" class="glass-arrow-element" aria-label="View Portfolio">
+          <a href="#works" class="glass-arrow-element" aria-label="View Portfolio">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -500,13 +543,12 @@
             <span class="skill-tag">Photoshop</span>
             <span class="skill-tag">Content Creating</span>
             <span class="skill-tag">Website Designing</span>
-            <span class="skill-tag">...</span>
-          </div>
+            <span class="skill-tag">And More...</span> </div>
           <div class="absolute bottom-4 left-4">
             <p class="text-sm text-gray-400">More About Me</p>
             <h3 class="text-lg font-semibold text-white">Specializations</h3>
           </div>
-          <a href="#" class="glass-arrow-element" aria-label="View All Specializations">
+          <a href="#about" class="glass-arrow-element" aria-label="View All Specializations">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -515,24 +557,24 @@
 
         <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg col-span-1" style="animation-delay: 0.5s; min-height: 120px;">
           <div class="flex items-center justify-center gap-4 pt-6 pb-4">
-            <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110">
+            <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110" aria-label="Instagram Profile">
               <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-                    class="social-icon"
-                    alt="Instagram"
-                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';" />
+                   class="social-icon"
+                   alt="Instagram icon"
+                   onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';" />
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" class="transition hover:scale-110">
+            <a href="https://www.linkedin.com/" target="_blank" class="transition hover:scale-110" aria-label="LinkedIn Profile">
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-                    class="social-icon"
-                    alt="LinkedIn"
-                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=LI';" />
+                   class="social-icon"
+                   alt="LinkedIn icon"
+                   onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=LI';" />
             </a>
           </div>
           <div class="absolute bottom-4 left-4">
             <p class="text-sm text-gray-400">Let's Connect</p>
             <h3 class="text-lg font-semibold text-white">Socials</h3>
           </div>
-          <a href="#" class="glass-arrow-element" aria-label="Connect on Socials">
+          <a href="#contact" class="glass-arrow-element" aria-label="Connect on Socials">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -551,54 +593,77 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const greetingsText = document.getElementById('greetings-text');
+        const profileHeading = document.getElementById('profile-heading');
         const glassCards = document.querySelectorAll('.glass-card');
         const navbar = document.querySelector('.navbar');
 
-        // Enhanced Intersection Observer
+        // Constants for scroll effects
+        // For Greetings text (simpler horizontal movement)
+        const MAX_GREETINGS_TRANSLATE_X = 500;
+        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 800;
+
+        // For Profile Heading (same horizontal movement as greetings, but to the left)
+        const MAX_PROFILE_TRANSLATE_X = 500; // Max distance to move left
+        const PROFILE_OPACITY_FADE_SCROLL_THRESHOLD = 800; // Same as greetings for consistent effect
+
+        // Intersection Observer to animate glass cards into view
         const observerOptions = {
-          root: null,
-          rootMargin: '0px 0px -10% 0px',
-          threshold: 0.1
+          root: null, // relative to the viewport
+          rootMargin: '0px 0px -10% 0px', // Trigger when 10% of the card is visible from the bottom
+          threshold: 0.1 // Trigger when 10% of the target is visible
         };
 
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
+              observer.unobserve(entry.target); // Stop observing once visible
             }
           });
         }, observerOptions);
 
+        // Observe each glass card
         glassCards.forEach(card => {
           observer.observe(card);
         });
 
-        // Enhanced scroll effects
+        // Enhanced scroll effects with throttling
         let ticking = false;
 
         function updateOnScroll() {
           const scrollY = window.scrollY;
 
-          // Navbar scroll effect
+          // Navbar scroll effect: becomes opaque when scrolled down
           if (scrollY > 100) {
             navbar.classList.add('scrolled');
           } else {
             navbar.classList.remove('scrolled');
           }
 
-          // Greetings text parallax
-          const maxTranslate = 500;
-          const translateValue = Math.min(scrollY, maxTranslate);
-          greetingsText.style.transform = `translateX(${translateValue}px)`;
+          // Greetings text effect: horizontal translation and fade
+          const greetingsTranslateX = Math.min(scrollY, MAX_GREETINGS_TRANSLATE_X);
+          const greetingsOpacity = Math.max(1 - (scrollY / GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD), 0);
+          greetingsText.style.transform = `translateX(${greetingsTranslateX}px)`;
+          greetingsText.style.opacity = greetingsOpacity;
 
-          // Optional: Add opacity fade
-          const opacity = Math.max(1 - (scrollY / 800), 0);
-          greetingsText.style.opacity = opacity;
+          // Profile Heading effect: horizontal translation to the left and fade
+          // The effect for profile heading should start after the greetings section is mostly scrolled past.
+          const profileEffectStartScroll = window.innerHeight * 0.8; // Adjust this value as needed
+          const profileScrollProgress = Math.max(0, scrollY - profileEffectStartScroll);
 
-          ticking = false;
+          // Calculate horizontal translation for profile heading (moving left)
+          // Since it's right-aligned, a negative translateX will move it left.
+          const profileTranslateX = -Math.min(profileScrollProgress, MAX_PROFILE_TRANSLATE_X);
+          const profileOpacity = Math.max(1 - (profileScrollProgress / PROFILE_OPACITY_FADE_SCROLL_THRESHOLD), 0);
+
+          profileHeading.style.transform = `translateX(${profileTranslateX}px)`;
+          profileHeading.style.opacity = profileOpacity;
+
+
+          ticking = false; // Reset ticking flag
         }
 
+        // Add scroll event listener with requestAnimationFrame for performance
         window.addEventListener('scroll', () => {
           if (!ticking) {
             window.requestAnimationFrame(updateOnScroll);
@@ -606,7 +671,7 @@
           }
         });
 
-        // Initial call to set correct states on load
+        // Initial call to set correct states on page load (e.g., if page is loaded already scrolled)
         updateOnScroll();
       });
     </script>
