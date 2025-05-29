@@ -428,12 +428,12 @@
         
         /* Mobile specific adjustments for minimized home content */
         #home-gradient-bg.minimized {
-          transform: scale(0.95) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
+          transform: scale(0.85) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
           border-radius: 2.5rem !important; /* Apply border-radius on mobile */
         }
         #greetings-text.minimized {
-            transform: scale(0.95) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
-            font-size: clamp(2.8rem, 4.5vw, 3.5rem) !important; /* Smaller font size for mobile minimized state */
+            transform: scale(0.85) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
+            font-size: clamp(2.5rem, 4vw, 3rem) !important; /* Smaller font size for mobile minimized state */
         }
       }
 
@@ -477,12 +477,12 @@
 
       /* Styles for the minimized home section content */
       #home-gradient-bg.minimized {
-        transform: scale(0.95) translateX(0.25rem) translateY(0.25rem); /* Small and top-left */
+        transform: scale(0.85) translateX(0.75rem) translateY(0.75rem); /* Small and top-left */
         border-radius: 2.5rem; /* Apply border-radius when minimized */
       }
       #greetings-text.minimized {
-        transform: scale(0.95) translateX(0.25rem) translateY(0.25rem); /* Small and top-left */
-        font-size: clamp(3.8rem, 6.5vw, 4.5rem); /* Smaller font size for minimized state */
+        transform: scale(0.85) translateX(0.75rem) translateY(0.75rem); /* Small and top-left */
+        font-size: clamp(3.2rem, 5.5vw, 3.8rem); /* Smaller font size for minimized state */
       }
     </style>
   </head>
@@ -663,9 +663,9 @@
 
         // Constants for home section fixed minimization effect
         const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization
-        const MINIMIZED_SCALE = 0.95; // Scale to 95% of original size
-        const MINIMIZED_TRANSLATE_X = 0.25; // rem
-        const MINIMIZED_TRANSLATE_Y = 0.25; // rem
+        const MINIMIZED_SCALE = 0.85; // Scale to 85% of original size (reverted)
+        const MINIMIZED_TRANSLATE_X = 0.75; // rem (reverted)
+        const MINIMIZED_TRANSLATE_Y = 0.75; // rem (reverted)
         const MINIMIZED_BORDER_RADIUS = 2.5; // rem
 
         // Greetings animation setup
