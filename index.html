@@ -17,7 +17,6 @@
       /* Body styling for dark background and gradient */
       body {
         background-color: #000000; /* Set to pure black */
-        /* Removed background-image for a solid black background */
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -32,7 +31,7 @@
       /* Glassmorphism card styling */
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
-        border-radius: 1.5rem;
+        border-radius: 2.5rem; /* Made rounder */
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow:
           0 4px 30px rgba(0, 0, 0, 0.1),
@@ -151,7 +150,7 @@
       /* Button glow effect styling */
       .btn-glow {
         position: relative;
-        border-radius: 0.75rem;
+        border-radius: 1rem; /* Made rounder */
         background-color: #1c1c1c;
         color: white;
         padding: 0.5rem 1.25rem;
@@ -243,35 +242,33 @@
 
       /* Hero greeting text styling */
       #greetings-text {
-        font-size: clamp(7rem, 12vw, 6rem); /* Reverted to original larger size */
+        font-size: clamp(7rem, 12vw, 6rem);
         line-height: 1;
-        font-weight: 400; /* Regular font weight */
-        letter-spacing: 0.02em; /* Slightly wider spacing for elegance */
+        font-weight: 400;
+        letter-spacing: 0.02em;
         position: relative;
-        z-index: 10; /* Ensure text is above the gradient background */
-        transition: opacity 0.5s ease-in-out; /* Keep transition for smooth scroll effect */
-        height: 6rem; /* Explicit height to contain absolute children, adjust as needed */
-        display: flex; /* Use flexbox to center children */
-        align-items: center; /* Center vertically */
-        justify-content: center; /* Center horizontally */
+        z-index: 10;
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out, font-size 0.5s ease-in-out; /* Added font-size transition */
       }
 
       /* Style for animating greeting spans */
       #greetings-text span {
         position: absolute;
         opacity: 0;
-        transition: opacity 1s ease-in-out; /* Smooth fade for text */
+        transition: opacity 1s ease-in-out;
       }
 
       /* My Professional Profile specific styling */
       #profile-heading {
-        font-size: clamp(6.5rem, 11vw, 5.5rem); /* Made a little smaller */
-        font-weight: 400; /* Changed to regular font weight */
+        font-size: clamp(6.5rem, 11vw, 5.5rem);
+        font-weight: 400;
         line-height: 1;
-        letter-spacing: 0.03em; /* Slightly wider spacing for elegance */
+        letter-spacing: 0.03em;
         position: relative;
-        /* No initial opacity or transform here, making it visible by default */
-        /* No transition here as it's not being animated by JS anymore */
       }
 
       /* Class to make elements visible (used by IntersectionObserver for glass cards) */
@@ -299,21 +296,24 @@
         100% { background-position: 0% 0%; }
       }
 
-      /* Enhanced navbar with better glass effect */
+      /* Enhanced navbar with full width and no rounded corners */
       .navbar {
-        background: transparent; /* Changed to transparent */
+        background: transparent;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid transparent; /* Changed to transparent */
+        border: 1px solid transparent;
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border-radius: 0; /* No border-radius */
+        margin: 0; /* No margin */
+        width: 100%; /* Full width */
       }
 
       /* Navbar styling when scrolled */
       .navbar.scrolled {
-        background: #0f0f0f; /* Fully opaque background */
-        backdrop-filter: none; /* Remove blur when scrolled */
-        -webkit-backdrop-filter: none; /* Remove blur when scrolled */
-        border-color: transparent; /* Make border transparent */
+        background: #0f0f0f;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       }
 
@@ -340,7 +340,7 @@
 
       /* Improved profile image styling */
       .profile-image {
-        border-radius: 1.5rem;
+        border-radius: 2.5rem; /* Made rounder */
         object-fit: cover;
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -354,9 +354,9 @@
 
       /* Social icons enhancement */
       .social-icon {
-        width: 4rem; /* Increased size */
-        height: 4rem; /* Increased size */
-        border-radius: 1rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 1.5rem; /* Made rounder */
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         filter: brightness(0.9);
       }
@@ -421,26 +421,19 @@
 
         /* Adjust navbar for mobile */
         .navbar {
-          margin: 0.5rem;
-          width: calc(100% - 1rem);
+          margin: 0; /* Ensures full width on mobile too */
+          width: 100%; /* Ensures full width on mobile too */
         }
-
-        /* Adjust skill tags for mobile */
-        .skill-tag {
-          font-size: 0.75rem;
-          padding: 0.4rem 0.8rem;
+        /* No border-radius for navbar on mobile either */
+        
+        /* Mobile specific adjustments for minimized home content */
+        #home-gradient-bg.minimized {
+          transform: scale(0.95) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
+          border-radius: 2.5rem !important; /* Apply border-radius on mobile */
         }
-
-        /* Adjust profile image for mobile */
-        .profile-image {
-          width: 8rem !important;
-          height: 8rem !important;
-        }
-
-        /* Adjust social icons for mobile */
-        .social-icon {
-          width: 3rem;
-          height: 3rem;
+        #greetings-text.minimized {
+            transform: scale(0.95) translateX(0.25rem) translateY(0.25rem) !important; /* Adjusted for mobile */
+            font-size: clamp(2.8rem, 4.5vw, 3.5rem) !important; /* Smaller font size for mobile minimized state */
         }
       }
 
@@ -472,13 +465,24 @@
 
       /* Style for the animating linear gradient background in the home section */
       #home-gradient-bg {
-        background-image: linear-gradient(135deg, rgb(0, 191, 255), rgb(147, 112, 219), rgb(255, 0, 127), rgb(255, 165, 0), rgb(0, 191, 255)); /* Repeating gradient for animation, now with full opacity */
-        background-size: 800% 800%; /* Larger size to allow more movement */
-        background-position: 0% 0%; /* Initial position */
+        background-image: linear-gradient(135deg, rgb(0, 191, 255), rgb(147, 112, 219), rgb(255, 0, 127), rgb(255, 165, 0), rgb(0, 191, 255));
+        background-size: 800% 800%;
+        background-position: 0% 0%;
         background-repeat: no-repeat;
-        opacity: 1; /* Initial opacity */
-        transition: background-size 0.2s ease-out, opacity 0.5s ease-in-out; /* Smooth transition for scroll effect */
-        animation: elegantGradientMove 30s ease-in-out infinite alternate; /* Slower, continuous elegant animation */
+        opacity: 1;
+        transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out; /* Smooth transition for transform and border-radius */
+        border-radius: 0; /* Initial border-radius */
+        animation: elegantGradientMove 30s ease-in-out infinite alternate;
+      }
+
+      /* Styles for the minimized home section content */
+      #home-gradient-bg.minimized {
+        transform: scale(0.95) translateX(0.25rem) translateY(0.25rem); /* Small and top-left */
+        border-radius: 2.5rem; /* Apply border-radius when minimized */
+      }
+      #greetings-text.minimized {
+        transform: scale(0.95) translateX(0.25rem) translateY(0.25rem); /* Small and top-left */
+        font-size: clamp(3.8rem, 6.5vw, 4.5rem); /* Smaller font size for minimized state */
       }
     </style>
   </head>
@@ -644,7 +648,6 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const greetingsTextContainer = document.getElementById('greetings-text');
-        const profileHeading = document.getElementById('profile-heading');
         const glassCards = document.querySelectorAll('.glass-card');
         const navbar = document.querySelector('.navbar');
         const homeSection = document.getElementById('home');
@@ -652,15 +655,18 @@
         const aboutSection = document.getElementById('about');
         const aboutGradientBg = document.getElementById('about-gradient-bg');
 
-        // Constants for scroll effects
-        const MAX_GREETINGS_TRANSLATE_X = 1000; // This is no longer used for text movement
-        const GREETINGS_OPACITY_FADE_SCROLL_THRESHOLD = 2000; // This is no longer used for text opacity
-
         // Constants for gradient effect (shared for consistency)
         const GRADIENT_START_SIZE = 800;
         const GRADIENT_END_SIZE = 10;
         const GRADIENT_START_OPACITY = 1;
-        const GRADIENT_END_OPACITY = 0; // The gradient will fade out completely
+        const GRADIENT_END_OPACITY = 0;
+
+        // Constants for home section fixed minimization effect
+        const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization
+        const MINIMIZED_SCALE = 0.95; // Scale to 95% of original size
+        const MINIMIZED_TRANSLATE_X = 0.25; // rem
+        const MINIMIZED_TRANSLATE_Y = 0.25; // rem
+        const MINIMIZED_BORDER_RADIUS = 2.5; // rem
 
         // Greetings animation setup
         const greetings = ["Greetings!", "Bonjour!", "Hola!", "안녕하세요!", "Mabuhay!"];
@@ -707,50 +713,26 @@
 
         function updateOnScroll() {
           const scrollY = window.scrollY;
+          const viewportWidth = window.innerWidth;
           const viewportHeight = window.innerHeight;
 
+          // Navbar scroll effect
           if (scrollY > 100) {
             navbar.classList.add('scrolled');
           } else {
             navbar.classList.remove('scrolled');
           }
 
-          // Animated linear gradient background effect for home section
-          if (homeSection && homeGradientBg) {
-            const homeSectionRect = homeSection.getBoundingClientRect();
-
-            // Define the scroll range over which the effect should occur
-            // Effect starts when the bottom of the home section is at 100% of viewport height (just entering view)
-            // Effect ends when the bottom of the home section is at 0% of viewport height (just leaving view)
-            const homeEffectStartBottom = viewportHeight;
-            const homeEffectEndBottom = 0;
-
-            let homeProgress = 0;
-            // Calculate progress: 0 when home section is fully visible, 1 when it's just left the viewport
-            if (homeSectionRect.bottom > homeEffectEndBottom && homeSectionRect.bottom < homeEffectStartBottom) {
-                homeProgress = 1 - ((homeSectionRect.bottom - homeEffectEndBottom) / (homeEffectStartBottom - homeEffectEndBottom));
-                homeProgress = Math.min(1, Math.max(0, homeProgress)); // Clamp to 0-1
-            } else if (homeSectionRect.bottom <= homeEffectEndBottom) {
-                homeProgress = 1; // Fully scrolled past
+          // Home section fixed minimization effect
+          if (homeGradientBg && greetingsTextContainer) {
+            if (scrollY > MINIMIZE_THRESHOLD) {
+              homeGradientBg.classList.add('minimized');
+              greetingsTextContainer.classList.add('minimized');
             } else {
-                homeProgress = 0; // Not yet scrolled into effect range
+              homeGradientBg.classList.remove('minimized');
+              greetingsTextContainer.classList.remove('minimized');
             }
-
-            // Interpolate home gradient size, shrinking it as we scroll down
-            let currentHomeGradientSize = GRADIENT_START_SIZE - (homeProgress * (GRADIENT_START_SIZE - GRADIENT_END_SIZE));
-            currentHomeGradientSize = Math.max(GRADIENT_END_SIZE, Math.min(GRADIENT_START_SIZE, currentHomeGradientSize));
-
-            // Interpolate home gradient opacity, fading it out as we scroll down
-            let currentHomeGradientOpacity = GRADIENT_START_OPACITY - (homeProgress * (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY));
-            currentHomeGradientOpacity = Math.max(GRADIENT_END_OPACITY, Math.min(GRADIENT_START_OPACITY, currentHomeGradientOpacity));
-
-            homeGradientBg.style.backgroundSize = `${currentHomeGradientSize}% ${currentHomeGradientSize}%`;
-            homeGradientBg.style.opacity = currentHomeGradientOpacity;
-
-            // Make the greetings text opacity follow the background's opacity
-            greetingsTextContainer.style.opacity = currentHomeGradientOpacity;
           }
-
 
           // Radial gradient background effect for the about section (remains the same)
           if (aboutSection && aboutGradientBg) {
@@ -791,6 +773,7 @@
           }
         });
 
+        // Initial call to set correct state on load
         updateOnScroll();
       });
     </script>
