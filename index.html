@@ -218,7 +218,6 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        pointer-events: none; /* Make the arrow div itself not clickable */
       }
 
 
@@ -252,7 +251,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /* Removed transform and font-size transitions for minimization */
       }
 
       /* Style for animating greeting spans */
@@ -424,14 +422,12 @@
           margin: 0; /* Ensures full width on mobile too */
           width: 100%; /* Ensures full width on mobile too */
         }
-        /* No border-radius for navbar on mobile either */
         
         /* Mobile specific adjustments for minimized home content */
         #home-gradient-bg.minimized {
           transform: scale(0.85) translateX(0.75rem) translateY(0.75rem) !important; /* Adjusted for mobile */
           border-radius: 2.5rem !important; /* Apply border-radius on mobile */
         }
-        /* Removed #greetings-text.minimized for mobile as well */
       }
 
       /* Performance optimization for reduced motion preference */
@@ -478,7 +474,66 @@
         transform: scale(0.85) translateX(0.75rem) translateY(0.75rem); /* Small and top-left */
         border-radius: 2.5rem; /* Apply border-radius when minimized */
       }
-      /* Removed #greetings-text.minimized as per user request */
+      
+      /* New style for the main profile introduction section (not a glass-card) */
+      #main-profile-section {
+        background-color: #1a1a1a; /* A slightly lighter dark background */
+        border-radius: 2.5rem; /* Keep rounded corners for consistency */
+        padding: 2.5rem; /* Generous padding */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        opacity: 1; /* Always visible */
+        transform: translateY(0); /* No initial slide-up animation */
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transitions for hover etc. */
+      }
+
+      #main-profile-section:hover {
+        transform: scale(1.01); /* Slight zoom on hover */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Specific styling for the About Me content section - REMOVED ALL BOX PROPERTIES */
+      #about-me-content {
+        background-color: transparent; /* Remove background color */
+        border-radius: 0; /* Remove border-radius */
+        box-shadow: none; /* Remove box-shadow */
+        padding: 0; /* Remove padding */
+        color: #e0e0e0; /* Light gray text for readability */
+        line-height: 1.6; /* Improved line spacing */
+        text-align: left; /* Align text to left */
+        opacity: 0; /* Hidden by default for JS animation */
+        transform: translateY(50px); /* Slide up animation */
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        display: flex; /* Use flexbox for image and text alignment */
+        align-items: flex-start; /* Align items to the top */
+        gap: 2rem; /* Space between image and text */
+      }
+
+      #about-me-content.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #about-me-content strong {
+        color: #ffffff; /* Make key terms stand out */
+        font-weight: 600;
+      }
+      
+      #about-me-content .profile-image-small {
+        border-radius: 2.5rem; /* Consistent rounded corners */
+        object-fit: cover;
+        flex-shrink: 0; /* Prevent image from shrinking */
+        width: 150px; /* Smaller size for this section */
+        height: 150px; /* Smaller size for this section */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+      }
+
+      @media (max-width: 768px) {
+        #about-me-content {
+          flex-direction: column; /* Stack image and text on mobile */
+          align-items: center; /* Center items when stacked */
+          text-align: center; /* Center text when stacked */
+        }
+      }
     </style>
   </head>
 
@@ -515,7 +570,9 @@
           My Professional Profile
         </h2>
 
-        <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2" style="min-height: 280px; animation-delay: 0.1s;">
+        <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2 cursor-pointer"
+             style="min-height: 280px; animation-delay: 0.1s;"
+             onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
           <img src="https://i.imgur.com/ohtb4tN.jpg"
                class="profile-image h-48 w-48"
                alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
@@ -525,7 +582,7 @@
             <h2 class="gradient-name mt-2 mb-1 md:mb-2">Shunsuke Fernando</h2>
             <p class="max-w-md text-gray-400 text-xs leading-relaxed">I am a Marketing Graduate from Cainta Rizal, passionate about digital innovation and creative solutions.</p>
           </div>
-          <div class="glass-arrow-element" aria-hidden="true">
+          <div class="glass-arrow-element" aria-hidden="true" style="pointer-events: none;">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
@@ -631,6 +688,27 @@
           </div>
         </div>
       </section>
+
+      <section id="about-me-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex justify-center items-center">
+        <div class="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-8">
+          <img src="https://i.imgur.com/ohtb4tN.jpg"
+               class="profile-image-small flex-shrink-0"
+               alt="Profile picture of Shunsuke Fernando"
+               onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/000000?text=Profile';" />
+          <div id="about-me-content" class="text-lg leading-relaxed flex-grow text-center md:text-left">
+            <h2 class="text-5xl font-bold mb-8">About Me</h2>
+            <p>
+              I currently reside in <strong class="text-white">Cainta, Rizal</strong>.
+              I am a dedicated Marketing student at <strong class="text-white">Jose Rizal University, Mandaluyong City</strong>, where I have been studying since 2021.
+              My academic journey has equipped me with a strong foundation in marketing principles, complemented by practical skills in graphic design, digital literacy, and content creation.
+              I am passionate about crafting engaging narratives and optimizing digital presence, actively contributing to student organizations like the JRU Liberal Arts Students Organization and the JRU Young Marketers Association, where I've honed my abilities in social media management and advertising.
+              My experience includes improving website design, SEO, and speed, creating content using Photoshop, writing articles, and shooting/editing videos and photos for house models at <strong class="text-white">State Properties Corporation Mandaluyong City</strong>.
+              I also managed Facebook and LinkedIn accounts, tracked engagements, and planned marketing collaterals for <strong class="text-white">QuickStart Solutions</strong> and <strong class="text-white">Quickstart Careers</strong> at <strong class="text-white">Allied Executive Search Consultants</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="text-center py-8 px-6">
@@ -649,6 +727,7 @@
         const homeGradientBg = document.getElementById('home-gradient-bg');
         const aboutSection = document.getElementById('about');
         const aboutGradientBg = document.getElementById('about-gradient-bg');
+        const aboutMeContent = document.getElementById('about-me-content'); // Get the new about me content div
 
         // Constants for gradient effect (shared for consistency)
         const GRADIENT_START_SIZE = 800;
@@ -684,7 +763,7 @@
         setInterval(animateGreetingText, 3000);
 
 
-        // Intersection Observer to animate glass cards into view
+        // Intersection Observer to animate glass cards and about-me-content into view
         const observerOptions = {
           root: null,
           rootMargin: '0px 0px -10% 0px',
@@ -700,9 +779,15 @@
           });
         }, observerOptions);
 
+        // Observe all glass cards
         glassCards.forEach(card => {
           observer.observe(card);
         });
+
+        // Observe the new about-me-content div
+        if (aboutMeContent) {
+          observer.observe(aboutMeContent);
+        }
 
         let ticking = false;
 
