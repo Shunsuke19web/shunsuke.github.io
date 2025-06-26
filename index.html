@@ -20,7 +20,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -535,6 +535,169 @@
           text-align: center; /* Center text when stacked */
         }
       }
+
+      /* Timeline specific styles */
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+        width: 90%; /* Keep it responsive */
+        max-width: 960px; /* Wider max-width for the overall timeline container */
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #00BFFF, #9370DB, #FF007F, #FFA500); /* Gradient line */
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* Set width for the boxes */
+        width: calc(50% - 40px); /* 45% of parent width, minus space for the dot/line */
+        top: 0; /* Reset */
+        left: auto; /* Reset */
+        right: auto; /* Reset */
+        clear: both; /* Clear floats for each item */
+      }
+
+      .timeline-item.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item:nth-child(odd) {
+        float: left; /* Float left for odd items */
+        margin-right: 40px; /* Space from the center line */
+        transform: translateX(-50px); /* Initial slide for left items */
+        text-align: right; /* Content aligned right */
+      }
+
+      .timeline-item:nth-child(odd).is-visible {
+        transform: translateX(0);
+      }
+
+      .timeline-item:nth-child(even) {
+        float: right; /* Float right for even items */
+        margin-left: 40px; /* Space from the center line */
+        transform: translateX(50px); /* Initial slide for right items */
+        text-align: left; /* Content aligned left */
+      }
+      
+      .timeline-item:nth-child(even).is-visible {
+        transform: translateX(0);
+      }
+
+      .timeline-item::before { /* The circle on the line */
+        content: '';
+        position: absolute;
+        top: 50%; /* Center vertically with the item */
+        width: 1rem;
+        height: 1rem;
+        background: linear-gradient(45deg, #00BFFF, #FF007F); /* Vibrant dot color */
+        border-radius: 50%;
+        transform: translateY(-50%);
+        border: 3px solid #000; /* Thicker border for prominence */
+        z-index: 10;
+      }
+
+      .timeline-item:nth-child(odd)::before {
+        right: -48px; /* Position relative to the item's right edge, 40px margin + 8px dot center */
+      }
+
+      .timeline-item:nth-child(even)::before {
+        left: -48px; /* Position relative to the item's left edge */
+      }
+
+      .timeline-content h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem; /* Reduced margin for company name */
+        color: #fff; /* Ensure heading is white */
+      }
+
+      .company-name {
+          font-size: 1.2rem; /* Smaller than h3, larger than p */
+          font-weight: 500;
+          color: #a0a0a0; /* Slightly lighter gray */
+          margin-bottom: 0.75rem; /* Space between company and description */
+      }
+
+      .timeline-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #c0c0c0; /* Lighter gray for readability */
+      }
+
+      .timeline-date {
+        position: absolute;
+        top: -2.5rem; /* Position above the box, increased value */
+        font-weight: 600;
+        color: #e0e0e0;
+        font-size: 1.1rem; /* Slightly bigger font size */
+        z-index: 5;
+        background-color: #000; /* Background to make date readable over line */
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.5rem;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-date {
+        right: 0; /* Align date to the right of the box */
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(even) .timeline-date {
+        left: 0; /* Align date to the left of the box */
+        text-align: left;
+      }
+
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 1.5rem; /* Align line to left on mobile */
+          transform: translateX(0);
+        }
+
+        .timeline-item {
+          width: 100%;
+          float: none; /* Remove floats */
+          margin-left: 0;
+          margin-right: 0;
+          padding-left: 3rem; /* Space for dot and line */
+          text-align: left !important;
+          transform: translateY(50px) !important; /* Restore initial mobile transform */
+        }
+
+        .timeline-item:nth-child(odd)::before,
+        .timeline-item:nth-child(even)::before {
+          left: 0.75rem; /* Align dot with line on mobile */
+          right: auto;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-date,
+        .timeline-item:nth-child(even) .timeline-date {
+          position: relative; /* Revert to relative for stacking */
+          top: auto;
+          left: auto;
+          right: auto;
+          text-align: center; /* Center dates on mobile */
+          margin-bottom: 0.5rem; /* Add some space below date */
+        }
+      }
     </style>
   </head>
 
@@ -643,7 +806,7 @@
           </a>
         </div>
 
-        <div class="glass-card relative col-span-1 md:col-span-2 flex flex-col justify-between p-10 shadow-lg" style="min-height: 140px; animation-delay: 0.2s;">
+        <div id="specializations-card" class="glass-card relative col-span-1 md:col-span-2 flex flex-col justify-between p-10 shadow-lg cursor-pointer" style="min-height: 140px; animation-delay: 0.2s;" onclick="document.getElementById('professional-experience-section').scrollIntoView({ behavior: 'smooth' });">
           <div class="flex max-w-xl flex-wrap items-center justify-center gap-3 pt-1 pb-10">
             <span class="skill-tag">SEO</span>
             <span class="skill-tag">Digital Marketing</span>
@@ -704,6 +867,38 @@
         </div>
       </section>
 
+      <!-- Professional Experiences Section (Timeline) -->
+      <section id="professional-experience-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
+          <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Professional Experiences</h2>
+
+          <div class="timeline">
+              <!-- Experience 1: STATE PROPERTIES CORPORATION -->
+              <div class="timeline-item">
+                  <span class="timeline-date">Feb - Apr, 2025</span>
+                  <div class="timeline-content">
+                      <h3>Digital Marketing Intern</h3>
+                      <p class="company-name">STATE PROPERTIES CORPORATION</p>
+                      <p>
+                          Responsible for enhancing website design, optimizing SEO, and improving site speed using WordPress’s Divi Builder. Created visual content with Photoshop, wrote articles, and captured/edited videos and photos of house models using Adobe tools.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Experience 2: ALLIED EXECUTIVE SEARCH CONSULTANT -->
+              <div class="timeline-item">
+                  <span class="timeline-date">Aug - Oct, 2024</span>
+                  <div class="timeline-content">
+                      <h3>Digital Marketing Intern</h3>
+                      <p class="company-name">ALLIED EXECUTIVE SEARCH CONSULTANT</p>
+                      <p>
+                          Managed Facebook and LinkedIn accounts for "QuickStart Solutions" and "Quickstart Careers." Tracked engagement, shared content, and responded to client inquiries. Planned and executed marketing collateral and analyzed trends.
+                      </p>
+                  </div>
+              </div>
+              <div style="clear: both;"></div> <!-- Clear floats -->
+          </div>
+      </section>
+
     </main>
 
     <footer class="text-center py-8 px-6">
@@ -721,12 +916,14 @@
         const homeSection = document.getElementById('home');
         const homeGradientBg = document.getElementById('home-gradient-bg');
         const aboutMeContent = document.getElementById('about-me-content'); // Get the new about me content div
+        const professionalExperienceSection = document.getElementById('professional-experience-section'); // Get the new professional experience section
+        const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
 
         // Constants for gradient effect (shared for consistency)
         const GRADIENT_START_SIZE = 800; // Initial background size percentage
-        const GRADIENT_END_SIZE = 10;   // Final background size percentage when fully scrolled
+        const GRADIENT_END_SIZE = 10;    // Final background size percentage when fully scrolled
         const GRADIENT_START_OPACITY = 1; // Initial opacity
-        const GRADIENT_END_OPACITY = 0;   // Final opacity when fully scrolled
+        const GRADIENT_END_OPACITY = 0;    // Final opacity when fully scrolled
 
         // Constants for home section fixed minimization effect
         const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization (for class toggle)
@@ -757,7 +954,7 @@
         setInterval(animateGreetingText, 3000); // Change greeting every 3 seconds
 
 
-        // Intersection Observer to animate glass cards and about-me-content into view
+        // Intersection Observer to animate glass cards, about-me-content, and timeline items into view
         const observerOptions = {
           root: null, // Observe relative to the viewport
           rootMargin: '0px 0px -10% 0px', // When 10% of element is visible from bottom
@@ -782,44 +979,51 @@
 
         // Observe the new about-me-content section for its entry animation
         observer.observe(aboutMeContent);
+        // Observe individual timeline items for staggered animation
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
 
         /**
          * Handles scroll events for navbar and home section background animations.
          */
-        window.addEventListener('scroll', () => {
+        function handleScroll() {
           const scrollY = window.scrollY;
 
-          // Navbar animation: Add 'scrolled' class when scrolled down
-          if (scrollY > 0) {
+          // Navbar scroll effect
+          if (scrollY > 50) { // Add 'scrolled' class after scrolling down 50px
             navbar.classList.add('scrolled');
           } else {
             navbar.classList.remove('scrolled');
           }
 
-          // Home section background animation:
-          // Toggle 'minimized' class based on scroll threshold
+          // Home section gradient minimization and fade effect
+          const homeSectionHeight = homeSection.offsetHeight;
+          // Calculate scroll progress within the home section
+          // Ensure it doesn't go below 0 or above 1
+          const scrollProgress = Math.max(0, Math.min(1, scrollY / (homeSectionHeight * 0.75))); // Adjust divisor to control fade speed
+
+          // Interpolate background size
+          const currentBgSize = GRADIENT_START_SIZE - (GRADIENT_START_SIZE - GRADIENT_END_SIZE) * scrollProgress;
+          homeGradientBg.style.backgroundSize = `${currentBgSize}% ${currentBgSize}%`;
+
+          // Interpolate opacity
+          const currentOpacity = GRADIENT_START_OPACITY - (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY) * scrollProgress;
+          homeGradientBg.style.opacity = currentOpacity;
+
+          // Toggle 'minimized' class for transform and border-radius
           if (scrollY > MINIMIZE_THRESHOLD) {
             homeGradientBg.classList.add('minimized');
           } else {
             homeGradientBg.classList.remove('minimized');
           }
+        }
 
-          // Dynamic background size and opacity change based on scroll progress
-          // The effect takes place over the height of the home section
-          const fadeScrollDistance = homeSection.offsetHeight; // The full distance over which the fade/shrink occurs
-          const scrollProgressForFade = Math.min(1, Math.max(0, scrollY / fadeScrollDistance));
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
 
-          // Calculate current background size based on scroll progress
-          const currentBgSize = GRADIENT_START_SIZE - (GRADIENT_START_SIZE - GRADIENT_END_SIZE) * scrollProgressForFade;
-          homeGradientBg.style.backgroundSize = `${currentBgSize}% ${currentBgSize}%`;
-
-          // Calculate current opacity based on scroll progress
-          const currentOpacity = GRADIENT_START_OPACITY - (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY) * scrollProgressForFade;
-          homeGradientBg.style.opacity = currentOpacity;
-        });
-
-        // Trigger initial scroll check in case the page loads scrolled
-        window.dispatchEvent(new Event('scroll'));
+        // Initial call to handleScroll to set correct state if page is loaded scrolled
+        handleScroll();
       });
     </script>
   </body>
