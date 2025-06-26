@@ -460,9 +460,10 @@
       /* Style for the animating linear gradient background in the home section */
       #home-gradient-bg {
         background-image: linear-gradient(135deg, rgb(0, 191, 255), rgb(147, 112, 219), rgb(255, 0, 127), rgb(255, 165, 0), rgb(0, 191, 255));
-        background-size: 800% 800%;
         background-position: 0% 0%;
         background-repeat: no-repeat;
+        /* Initial state of background-size and opacity for JS to control */
+        background-size: 800% 800%;
         opacity: 1;
         transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out; /* Smooth transition for transform and border-radius */
         border-radius: 0; /* Initial border-radius */
@@ -564,19 +565,18 @@
       </section>
 
       <section id="about" class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4 relative overflow-hidden">
-        <div id="about-gradient-bg" class="absolute inset-0 z-0"></div>
 
         <h2 id="profile-heading" class="col-span-full text-center mb-16 mt-8 about-heading-gradient">
           My Professional Profile
         </h2>
 
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2 cursor-pointer"
-             style="min-height: 280px; animation-delay: 0.1s;"
-             onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
+              style="min-height: 280px; animation-delay: 0.1s;"
+              onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
           <img src="https://i.imgur.com/ohtb4tN.jpg"
-               class="profile-image h-48 w-48"
-               alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
-               onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';" />
+                class="profile-image h-48 w-48"
+                alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
+                onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';" />
           <div class="flex flex-col justify-center text-left">
             <p class="mb-1 text-lg text-gray-400">Marketer</p>
             <h2 class="gradient-name mt-2 mb-1 md:mb-2">Shunsuke Fernando</h2>
@@ -666,15 +666,15 @@
           <div class="flex items-center justify-center gap-4 pt-6 pb-4">
             <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110" aria-label="Instagram Profile">
               <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-                   class="social-icon"
-                   alt="Instagram icon"
-                   onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';" />
+                    class="social-icon"
+                    alt="Instagram icon"
+                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';" />
             </a>
             <a href="https://www.linkedin.com/" target="_blank" class="transition hover:scale-110" aria-label="LinkedIn Profile">
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-                   class="social-icon"
-                   alt="LinkedIn icon"
-                   onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=LI';" />
+                    class="social-icon"
+                    alt="LinkedIn icon"
+                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=LI';" />
             </a>
           </div>
           <div class="absolute bottom-4 left-4">
@@ -692,18 +692,13 @@
       <section id="about-me-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex justify-center items-center">
         <div class="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-8">
           <img src="https://i.imgur.com/ohtb4tN.jpg"
-               class="profile-image-small flex-shrink-0"
-               alt="Profile picture of Shunsuke Fernando"
-               onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/000000?text=Profile';" />
+                class="profile-image-small flex-shrink-0"
+                alt="Profile picture of Shunsuke Fernando"
+                onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/000000?text=Profile';" />
           <div id="about-me-content" class="text-lg leading-relaxed flex-grow text-center md:text-left">
             <h2 class="text-5xl font-bold mb-8">About Me</h2>
-            <p>
-              I currently reside in <strong class="text-white">Cainta, Rizal</strong>.
-              I am a dedicated Marketing student at <strong class="text-white">Jose Rizal University, Mandaluyong City</strong>, where I have been studying since 2021.
-              My academic journey has equipped me with a strong foundation in marketing principles, complemented by practical skills in graphic design, digital literacy, and content creation.
-              I am passionate about crafting engaging narratives and optimizing digital presence, actively contributing to student organizations like the JRU Liberal Arts Students Organization and the JRU Young Marketers Association, where I've honed my abilities in social media management and advertising.
-              My experience includes improving website design, SEO, and speed, creating content using Photoshop, writing articles, and shooting/editing videos and photos for house models at <strong class="text-white">State Properties Corporation Mandaluyong City</strong>.
-              I also managed Facebook and LinkedIn accounts, tracked engagements, and planned marketing collaterals for <strong class="text-white">QuickStart Solutions</strong> and <strong class="text-white">Quickstart Careers</strong> at <strong class="text-white">Allied Executive Search Consultants</strong>.
+            <p class="text-justify">
+              I am a Marketing student based in <strong class="text-white">Cainta, Rizal</strong>. I specialize in graphic design, digital literacy, and content creation, and actively contribute to student organizations. My experience includes enhancing website design, SEO, and speed; creating content (Photoshop, articles, video/photo for house models); and managing social media accounts, tracking engagements, and planning marketing collaterals for various initiatives.
             </p>
           </div>
         </div>
@@ -725,22 +720,16 @@
         const navbar = document.querySelector('.navbar');
         const homeSection = document.getElementById('home');
         const homeGradientBg = document.getElementById('home-gradient-bg');
-        const aboutSection = document.getElementById('about');
-        const aboutGradientBg = document.getElementById('about-gradient-bg');
         const aboutMeContent = document.getElementById('about-me-content'); // Get the new about me content div
 
         // Constants for gradient effect (shared for consistency)
-        const GRADIENT_START_SIZE = 800;
-        const GRADIENT_END_SIZE = 10;
-        const GRADIENT_START_OPACITY = 1;
-        const GRADIENT_END_OPACITY = 0;
+        const GRADIENT_START_SIZE = 800; // Initial background size percentage
+        const GRADIENT_END_SIZE = 10;   // Final background size percentage when fully scrolled
+        const GRADIENT_START_OPACITY = 1; // Initial opacity
+        const GRADIENT_END_OPACITY = 0;   // Final opacity when fully scrolled
 
         // Constants for home section fixed minimization effect
-        const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization
-        const MINIMIZED_SCALE = 0.85; // Scale for background minimization (reverted to 0.85)
-        const MINIMIZED_TRANSLATE_X = 0.75; // rem for background minimization (reverted to 0.75)
-        const MINIMIZED_TRANSLATE_Y = 0.75; // rem for background minimization (reverted to 0.75)
-        const MINIMIZED_BORDER_RADIUS = 2.5; // rem
+        const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization (for class toggle)
 
         // Greetings animation setup
         const greetings = ["Greetings!", "Bonjour!", "Hola!", "안녕하세요!", "Mabuhay!"];
@@ -748,113 +737,89 @@
         let greetingSpan = document.createElement('span');
         greetingsTextContainer.appendChild(greetingSpan);
 
+        /**
+         * Animates the greeting text by fading out the current greeting
+         * and fading in the next one in the sequence.
+         */
         function animateGreetingText() {
-          greetingSpan.style.opacity = '0';
+          greetingSpan.style.opacity = '0'; // Start fading out
 
           setTimeout(() => {
-            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
-            greetingSpan.textContent = greetings[currentGreetingIndex];
-            greetingSpan.style.opacity = '1';
-          }, 1000);
+            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length; // Cycle through greetings
+            greetingSpan.textContent = greetings[currentGreetingIndex]; // Update text
+            greetingSpan.style.opacity = '1'; // Fade in
+          }, 1000); // Wait 1 second for fade out, then change text and fade in
         }
 
+        // Initialize first greeting and start animation interval
         greetingSpan.textContent = greetings[0];
         greetingSpan.style.opacity = '1';
-        setInterval(animateGreetingText, 3000);
+        setInterval(animateGreetingText, 3000); // Change greeting every 3 seconds
 
 
         // Intersection Observer to animate glass cards and about-me-content into view
         const observerOptions = {
-          root: null,
-          rootMargin: '0px 0px -10% 0px',
-          threshold: 0.1
+          root: null, // Observe relative to the viewport
+          rootMargin: '0px 0px -10% 0px', // When 10% of element is visible from bottom
+          threshold: 0.1 // Trigger when 10% of the target is visible
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
+              // Add 'is-visible' class to trigger CSS animation
               entry.target.classList.add('is-visible');
+              // Stop observing once visible to prevent re-triggering
               observer.unobserve(entry.target);
             }
           });
         }, observerOptions);
 
-        // Observe all glass cards
+        // Observe all glass cards for their entry animation
         glassCards.forEach(card => {
           observer.observe(card);
         });
 
-        // Observe the new about-me-content div
-        if (aboutMeContent) {
-          observer.observe(aboutMeContent);
-        }
+        // Observe the new about-me-content section for its entry animation
+        observer.observe(aboutMeContent);
 
-        let ticking = false;
-
-        function updateOnScroll() {
+        /**
+         * Handles scroll events for navbar and home section background animations.
+         */
+        window.addEventListener('scroll', () => {
           const scrollY = window.scrollY;
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
 
-          // Navbar scroll effect
-          if (scrollY > 100) {
+          // Navbar animation: Add 'scrolled' class when scrolled down
+          if (scrollY > 0) {
             navbar.classList.add('scrolled');
           } else {
             navbar.classList.remove('scrolled');
           }
 
-          // Home section fixed minimization effect for background only
-          if (homeGradientBg) { // Only apply to background
-            if (scrollY > MINIMIZE_THRESHOLD) {
-              homeGradientBg.classList.add('minimized');
-            } else {
-              homeGradientBg.classList.remove('minimized');
-            }
-          }
-          // Greetings text remains its original size and position
-          // No changes needed for greetingsTextContainer here
-
-          // Radial gradient background effect for the about section (remains the same)
-          if (aboutSection && aboutGradientBg) {
-            const aboutSectionRect = aboutSection.getBoundingClientRect();
-
-            const ABOUT_GRADIENT_START_VIEWPORT_PERCENT = 0.8;
-            const ABOUT_GRADIENT_END_VIEWPORT_PERCENT = 0.2;
-
-            const startEffectAt = viewportHeight * ABOUT_GRADIENT_START_VIEWPORT_PERCENT;
-            const endEffectAt = viewportHeight * ABOUT_GRADIENT_END_VIEWPORT_PERCENT;
-
-            let progress = 0;
-            if (aboutSectionRect.top < startEffectAt && aboutSectionRect.top > endEffectAt) {
-              progress = 1 - ((aboutSectionRect.top - endEffectAt) / (startEffectAt - endEffectAt));
-            } else if (aboutSectionRect.top <= endEffectAt) {
-              progress = 1;
-            } else {
-              progress = 0;
-            }
-
-            let currentGradientSize = GRADIENT_START_SIZE - (progress * (GRADIENT_START_SIZE - GRADIENT_END_SIZE));
-            currentGradientSize = Math.max(GRADIENT_END_SIZE, Math.min(GRADIENT_START_SIZE, currentGradientSize));
-
-            let currentGradientOpacity = GRADIENT_START_OPACITY - (progress * (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY));
-            currentGradientOpacity = Math.max(GRADIENT_END_OPACITY, Math.min(GRADIENT_START_OPACITY, currentGradientOpacity));
-
-            aboutGradientBg.style.backgroundSize = `${currentGradientSize}% ${currentGradientSize}%`;
-            aboutGradientBg.style.opacity = currentGradientOpacity;
+          // Home section background animation:
+          // Toggle 'minimized' class based on scroll threshold
+          if (scrollY > MINIMIZE_THRESHOLD) {
+            homeGradientBg.classList.add('minimized');
+          } else {
+            homeGradientBg.classList.remove('minimized');
           }
 
-          ticking = false;
-        }
+          // Dynamic background size and opacity change based on scroll progress
+          // The effect takes place over the height of the home section
+          const fadeScrollDistance = homeSection.offsetHeight; // The full distance over which the fade/shrink occurs
+          const scrollProgressForFade = Math.min(1, Math.max(0, scrollY / fadeScrollDistance));
 
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            window.requestAnimationFrame(updateOnScroll);
-            ticking = true;
-          }
+          // Calculate current background size based on scroll progress
+          const currentBgSize = GRADIENT_START_SIZE - (GRADIENT_START_SIZE - GRADIENT_END_SIZE) * scrollProgressForFade;
+          homeGradientBg.style.backgroundSize = `${currentBgSize}% ${currentBgSize}%`;
+
+          // Calculate current opacity based on scroll progress
+          const currentOpacity = GRADIENT_START_OPACITY - (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY) * scrollProgressForFade;
+          homeGradientBg.style.opacity = currentOpacity;
         });
 
-        // Initial call to set correct state on load
-        updateOnScroll();
+        // Trigger initial scroll check in case the page loads scrolled
+        window.dispatchEvent(new Event('scroll'));
       });
     </script>
   </body>
