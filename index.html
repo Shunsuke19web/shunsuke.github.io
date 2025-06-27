@@ -20,7 +20,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        font-family: "Inter", -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -563,7 +563,6 @@
         background: rgba(255, 255, 255, 0.05);
         border-radius: 1.5rem;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         opacity: 0;
@@ -574,12 +573,28 @@
         left: auto; /* Reset */
         right: auto; /* Reset */
         clear: both; /* Clear floats for each item */
+        /* Reverted to original box-shadow for subtle effect */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 
+                    inset 0 0 20px rgba(255, 255, 255, 0.03);
       }
 
       .timeline-item.is-visible {
         opacity: 1;
         transform: translateY(0);
+        /* Reverted to original box-shadow for subtle effect */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 
+                    inset 0 0 20px rgba(255, 255, 255, 0.03);
       }
+
+      /* Reverted to original box-shadow for hover effect */
+      .timeline-item:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15),
+                    inset 0 0 30px rgba(255, 255, 255, 0.06);
+        transform: scale(1.03); /* Kept scale effect on hover */
+        background: rgba(255, 255, 255, 0.08); /* Kept background change on hover */
+        border-color: rgba(255, 255, 255, 0.18); /* Kept border color change on hover */
+      }
+
 
       .timeline-item:nth-child(odd) {
         float: left; /* Float left for odd items */
@@ -634,7 +649,12 @@
       .company-name {
           font-size: 1.2rem; /* Smaller than h3, larger than p */
           font-weight: 500;
-          color: #a0a0a0; /* Slightly lighter gray */
+          /* Apply gradient color to company name */
+          background-image: linear-gradient(90deg, #00BFFF, #9370DB, #FF007F, #FFA500); /* Vibrant blue, medium purple, rose, orange */
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent; /* Fallback for non-webkit browsers */
           margin-bottom: 0.75rem; /* Space between company and description */
       }
 
@@ -879,7 +899,7 @@
                       <h3>Digital Marketing Intern</h3>
                       <p class="company-name">STATE PROPERTIES CORPORATION</p>
                       <p>
-                          Responsible for enhancing website design, optimizing SEO, and improving site speed using WordPress’s Divi Builder. Created visual content with Photoshop, wrote articles, and captured/edited videos and photos of house models using Adobe tools.
+                          Enhanced website design, SEO, and speed using Divi Builder. Created content (Photoshop, articles, video/photo for house models) and edited visuals using Adobe tools.
                       </p>
                   </div>
               </div>
@@ -891,7 +911,7 @@
                       <h3>Digital Marketing Intern</h3>
                       <p class="company-name">ALLIED EXECUTIVE SEARCH CONSULTANT</p>
                       <p>
-                          Managed Facebook and LinkedIn accounts for "QuickStart Solutions" and "Quickstart Careers." Tracked engagement, shared content, and responded to client inquiries. Planned and executed marketing collateral and analyzed trends.
+                          Managed Facebook and LinkedIn accounts. Tracked engagement, shared content, responded to inquiries, and planned marketing collateral. Conducted trend analysis.
                       </p>
                   </div>
               </div>
