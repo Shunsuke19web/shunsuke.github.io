@@ -1194,25 +1194,23 @@
         let greetingSpan = document.createElement('span');
         greetingsTextContainer.appendChild(greetingSpan);
 
-        // Set the initial greeting immediately and make it visible
-        greetingSpan.textContent = greetings[currentGreetingIndex];
-        greetingSpan.style.opacity = '1'; // Ensure it's visible from the start
-
         /**
          * Animates the greeting text by fading out the current greeting
          * and fading in the next one in the sequence.
          */
         function animateGreetingText() {
-          greetingSpan.style.opacity = '0'; // Start fading out the current greeting
+          greetingSpan.style.opacity = '0'; // Start fading out
 
           setTimeout(() => {
             currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length; // Cycle through greetings
             greetingSpan.textContent = greetings[currentGreetingIndex]; // Update text
-            greetingSpan.style.opacity = '1'; // Fade in the new greeting
+            greetingSpan.style.opacity = '1'; // Fade in
           }, 1000); // Wait 1 second for fade out, then change text and fade in
         }
 
-        // Start animation interval for subsequent greetings
+        // Initialize first greeting and start animation interval
+        greetingSpan.textContent = greetings[0];
+        greetingSpan.style.opacity = '1';
         setInterval(animateGreetingText, 3000); // Change greeting every 3 seconds
 
 
