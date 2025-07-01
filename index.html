@@ -741,6 +741,7 @@
           <a href="#works" class="text-glow">Works</a>
           <a href="#contact" class="text-glow">Contact</a>
           <a href="#blog-posts" class="text-glow">Blog</a>
+          <a href="#redesigned-website" class="text-glow">Redesign</a>
         </nav>
         </div>
     </header>
@@ -968,6 +969,20 @@
         </p>
       </section>
 
+      <!-- New Section for Redesigned Website -->
+      <section id="redesigned-website" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
+        <h2 class="text-5xl font-bold mb-16 mt-8">Redesigned the Website using Wordpress Divibuilder</h2>
+
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
+          <img src="https://imgur.com/5G9GBQs.png" alt="Redesigned Website Screenshot 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+1';" style="animation-delay: 0.1s;"/>
+          <img src="https://imgur.com/pVYJ7y1.png" alt="Redesigned Website Screenshot 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+2';" style="animation-delay: 0.2s;"/>
+        </div>
+
+        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed is-visible" style="animation-delay: 0.3s;">
+          I redesigned the whole website by removing some elements that weren't useful to the site, fixing the formation of some elements, correcting grammar, and making it modern-like.
+        </p>
+      </section>
+
     </main>
 
     <footer class="text-center py-8 px-6">
@@ -989,6 +1004,7 @@
         const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
         const blogPostsSection = document.getElementById('blog-posts'); // Get the new blog posts section
         const versaillesWebsiteSection = document.getElementById('versailles-website'); // Get the new Versailles section
+        const redesignedWebsiteSection = document.getElementById('redesigned-website'); // Get the new redesigned website section
 
 
         // Constants for gradient effect (shared for consistency)
@@ -1070,6 +1086,14 @@
             const versaillesParagraph = versaillesWebsiteSection.querySelector('p.text-lg');
             if (versaillesImage) observer.observe(versaillesImage);
             if (versaillesParagraph) observer.observe(versaillesParagraph);
+        }
+
+        // Observe the redesigned website section content for animation
+        if (redesignedWebsiteSection) {
+            const redesignedImagesContainer = redesignedWebsiteSection.querySelector('.flex.flex-col.md\\:flex-row');
+            const redesignedParagraph = redesignedWebsiteSection.querySelector('p.text-lg');
+            if (redesignedImagesContainer) observer.observe(redesignedImagesContainer);
+            if (redesignedParagraph) observer.observe(redesignedParagraph);
         }
 
 
