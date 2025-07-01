@@ -20,7 +20,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -740,8 +740,6 @@
           <a href="#about" class="text-glow">About</a>
           <a href="#works" class="text-glow">Works</a>
           <a href="#contact" class="text-glow">Contact</a>
-          <a href="#blog-posts" class="text-glow">Blog</a>
-          <a href="#redesigned-website" class="text-glow">Redesign</a>
         </nav>
         </div>
     </header>
@@ -822,7 +820,7 @@
           <div class="flex items-center justify-center pt-3 pb-2">
             <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
               <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1_0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
             </div>
           </div>
@@ -941,18 +939,21 @@
           </div>
       </section>
 
-      <!-- New Section for Versailles Town Plaza's Website -->
-      <section id="versailles-website" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white">
-        <h2 class="text-5xl font-bold mb-16 mt-8 text-left">
-          Versailles Town Plaza's <span class="about-heading-gradient">Website</span>
+      <!-- Section for Versailles Alabang Village's Marketing Collaterals -->
+      <section id="versailles-marketing-collaterals" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
+        <h2 class="text-5xl font-bold mb-16 mt-8">
+          Versailles Alabang Village's <br><span class="about-heading-gradient">Marketing Collaterals</span>
         </h2>
 
-        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-          <img src="https://imgur.com/SJtXPKM.png" alt="Versailles Town Plaza Website Screenshot" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Website+Image';" style="animation-delay: 0.1s;"/>
-          <p class="text-lg text-gray-300 md:w-1/2 leading-relaxed text-center md:text-left is-visible" style="animation-delay: 0.2s;">
-            During my internship, I successfully increased Versailles Town Plaza's website total traffic by <strong>100 percent</strong>. This significant growth was achieved entirely through <strong>organic strategies</strong>, without the use of paid advertisements, demonstrating effective SEO and content implementation.
-          </p>
+        <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
+          <img src="https://imgur.com/2QLuoUz.png" alt="Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+1';" style="animation-delay: 0.1s;"/>
+          <img src="https://imgur.com/1EgegOc.png" alt="Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+2';" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/AFH2AmU.png" alt="Marketing Collateral 3" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+3';" style="animation-delay: 0.3s;"/>
         </div>
+
+        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
+          Here are some of the marketing collaterals that I made for their social media engagement using Photoshop. All of these, and more, can be found on their social media page: <a href="https://www.facebook.com/versaillesalabangofficial/" target="_blank" class="text-blue-400 hover:underline">Versailles Alabang Village</a>.
+        </p>
       </section>
 
       <!-- Section for Website's Blog Post -->
@@ -1003,7 +1004,7 @@
         const professionalExperienceSection = document.getElementById('professional-experience-section'); // Get the new professional experience section
         const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
         const blogPostsSection = document.getElementById('blog-posts'); // Get the new blog posts section
-        const versaillesWebsiteSection = document.getElementById('versailles-website'); // Get the new Versailles section
+        const versaillesMarketingCollateralsSection = document.getElementById('versailles-marketing-collaterals'); // Get the new Marketing Collaterals section
         const redesignedWebsiteSection = document.getElementById('redesigned-website'); // Get the new redesigned website section
 
 
@@ -1080,12 +1081,10 @@
             // if (blogParagraph) observer.observe(blogParagraph);
         }
 
-        // Observe the Versailles website section content for animation
-        if (versaillesWebsiteSection) {
-            const versaillesImage = versaillesWebsiteSection.querySelector('img');
-            const versaillesParagraph = versaillesWebsiteSection.querySelector('p.text-lg');
-            if (versaillesImage) observer.observe(versaillesImage);
-            if (versaillesParagraph) observer.observe(versaillesParagraph);
+        // Observe the Versailles marketing collaterals section content for animation
+        if (versaillesMarketingCollateralsSection) {
+            const versaillesImages = versaillesMarketingCollateralsSection.querySelectorAll('img');
+            versaillesImages.forEach(img => observer.observe(img));
         }
 
         // Observe the redesigned website section content for animation
