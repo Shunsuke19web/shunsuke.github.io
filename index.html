@@ -806,7 +806,7 @@
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2 cursor-pointer"
               style="min-height: 280px; animation-delay: 0.1s;"
               onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
-          <img src="https://i.imgur.com/ohtb4tN.jpg"
+          <img src="https://imgur.com/WERo5f1.png"
                 class="profile-image h-48 w-48"
                 alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
                 onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';"
@@ -932,7 +932,7 @@
 
       <section id="about-me-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex justify-center items-center">
         <div class="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-8">
-          <img src="https://i.imgur.com/ohtb4tN.jpg"
+          <img src="https://imgur.com/WERo5f1.png"
                 class="profile-image-small flex-shrink-0"
                 alt="Profile picture of Shunsuke Fernando"
                 onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/000000?text=Profile';"
@@ -980,7 +980,7 @@
 
           <div class="max-w-4xl w-full flex flex-col items-center gap-8 mt-8">
               <div class="flex justify-center items-center gap-4 mb-8">
-                  <img src="https://imgur.com/L3jNVeg.png" alt="State Properties Logo 1" class="h-56 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Logo1';"
+                  <img src="https://imgur.com/AqNGsj5.png" alt="State Properties Logo 1" class="h-56 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Logo1';"
                   width="224" height="224">
                   <img src="https://imgur.com/nFn1Hzy.png" alt="State Properties Logo 2" class="h-56 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Logo2';"
                   width="224" height="224">
@@ -1194,23 +1194,25 @@
         let greetingSpan = document.createElement('span');
         greetingsTextContainer.appendChild(greetingSpan);
 
+        // Set the initial greeting immediately and make it visible
+        greetingSpan.textContent = greetings[currentGreetingIndex];
+        greetingSpan.style.opacity = '1'; // Ensure it's visible from the start
+
         /**
          * Animates the greeting text by fading out the current greeting
          * and fading in the next one in the sequence.
          */
         function animateGreetingText() {
-          greetingSpan.style.opacity = '0'; // Start fading out
+          greetingSpan.style.opacity = '0'; // Start fading out the current greeting
 
           setTimeout(() => {
             currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length; // Cycle through greetings
             greetingSpan.textContent = greetings[currentGreetingIndex]; // Update text
-            greetingSpan.style.opacity = '1'; // Fade in
+            greetingSpan.style.opacity = '1'; // Fade in the new greeting
           }, 1000); // Wait 1 second for fade out, then change text and fade in
         }
 
-        // Initialize first greeting and start animation interval
-        greetingSpan.textContent = greetings[0];
-        greetingSpan.style.opacity = '1';
+        // Start animation interval for subsequent greetings
         setInterval(animateGreetingText, 3000); // Change greeting every 3 seconds
 
 
@@ -1375,4 +1377,3 @@
     </script>
   </body>
 </html>
-
