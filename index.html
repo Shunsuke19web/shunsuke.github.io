@@ -940,7 +940,21 @@
           </div>
       </section>
 
-      <!-- New Section for Website's Blog Post -->
+      <!-- New Section for Versailles Town Plaza's Website -->
+      <section id="versailles-website" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white">
+        <h2 class="text-5xl font-bold mb-16 mt-8 text-left">
+          Versailles Town Plaza's <span class="about-heading-gradient">Website</span>
+        </h2>
+
+        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+          <img src="https://imgur.com/SJtXPKM.png" alt="Versailles Town Plaza Website Screenshot" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Website+Image';" style="animation-delay: 0.1s;"/>
+          <p class="text-lg text-gray-300 md:w-1/2 leading-relaxed text-center md:text-left is-visible" style="animation-delay: 0.2s;">
+            During my internship, I successfully increased Versailles Town Plaza's website total traffic by <strong>100 percent</strong>. This significant growth was achieved entirely through <strong>organic strategies</strong>, without the use of paid advertisements, demonstrating effective SEO and content implementation.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section for Website's Blog Post -->
       <section id="blog-posts" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">Website's Blog Post</h2>
 
@@ -974,6 +988,7 @@
         const professionalExperienceSection = document.getElementById('professional-experience-section'); // Get the new professional experience section
         const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
         const blogPostsSection = document.getElementById('blog-posts'); // Get the new blog posts section
+        const versaillesWebsiteSection = document.getElementById('versailles-website'); // Get the new Versailles section
 
 
         // Constants for gradient effect (shared for consistency)
@@ -1047,6 +1062,14 @@
             // const blogParagraph = blogPostsSection.querySelector('p.text-lg');
             // if (blogImagesContainer) observer.observe(blogImagesContainer);
             // if (blogParagraph) observer.observe(blogParagraph);
+        }
+
+        // Observe the Versailles website section content for animation
+        if (versaillesWebsiteSection) {
+            const versaillesImage = versaillesWebsiteSection.querySelector('img');
+            const versaillesParagraph = versaillesWebsiteSection.querySelector('p.text-lg');
+            if (versaillesImage) observer.observe(versaillesImage);
+            if (versaillesParagraph) observer.observe(versaillesParagraph);
         }
 
 
