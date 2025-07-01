@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shunsuke's Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preload the Inter font for faster text rendering -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO4qJgRIoovp4.woff2" as="font" type="font/woff2" crossorigin>
+
     <style>
       /* Smooth scroll behavior for all elements */
       * {
@@ -804,7 +806,7 @@
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2 cursor-pointer"
               style="min-height: 280px; animation-delay: 0.1s;"
               onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
-          <img src="https://imgur.com/GcFf2Qi.jpg"
+          <img src="https://i.imgur.com/ohtb4tN.jpg"
                 class="profile-image h-48 w-48"
                 alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
                 onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';" />
@@ -1004,9 +1006,9 @@
         </h2>
 
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
-          <img src="https://imgur.com/mhTTEih.png" alt="Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+1';" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/lhAFpsi.png" alt="Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+2';" style="animation-delay: 0.2s;"/>
-          <img src="https://imgur.com/8FrHDJa.png" alt="Marketing Collateral 3" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+3';" style="animation-delay: 0.3s;"/>
+          <img src="https://imgur.com/mhTTEih.png" alt="Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+1';" loading="lazy" style="animation-delay: 0.1s;"/>
+          <img src="https://imgur.com/lhAFpsi.png" alt="Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+2';" loading="lazy" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/8FrHDJa.png" alt="Marketing Collateral 3" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+3';" loading="lazy" style="animation-delay: 0.3s;"/>
         </div>
 
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
@@ -1026,14 +1028,14 @@
             During my internship, I successfully increased Versailles Town Plaza's website total traffic by 100 percent. This significant growth was achieved organically, without the use of paid advertisements, demonstrating effective SEO and content strategies.
           </p>
           <!-- Image on the right -->
-          <img src="https://imgur.com/SJtXPKM.png" alt="Website Traffic Increase" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Traffic+Image';" />
+          <img src="https://imgur.com/SJtXPKM.png" alt="Website Traffic Increase" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Traffic+Image';" loading="lazy" />
         </div>
 
         <h2 class="text-5xl font-bold mb-16 mt-8">Website's Blog Post</h2>
 
         <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
-          <img src="https://imgur.com/0E2EQ38.png" alt="Blog Post Image 1" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+1';" />
-          <img src="https://imgur.com/igHyaKx.png" alt="Blog Post Image 2" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+2';" />
+          <img src="https://imgur.com/0E2EQ38.png" alt="Blog Post Image 1" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+1';" loading="lazy" />
+          <img src="https://imgur.com/igHyaKx.png" alt="Blog Post Image 2" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+2';" loading="lazy" />
         </div>
 
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -1046,8 +1048,8 @@
         <h2 class="text-5xl font-bold mb-16 mt-8">Redesigned the Website using Wordpress Divibuilder</h2>
 
         <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
-          <img src="https://imgur.com/5G9GBQs.png" alt="Redesigned Website Screenshot 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+1';" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/pVYJ7y1.png" alt="Redesigned Website Screenshot 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+2';" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/5G9GBQs.png" alt="Redesigned Website Screenshot 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+1';" loading="lazy" style="animation-delay: 0.1s;"/>
+          <img src="https://imgur.com/pVYJ7y1.png" alt="Redesigned Website Screenshot 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+2';" loading="lazy" style="animation-delay: 0.2s;"/>
         </div>
 
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed is-visible" style="animation-delay: 0.3s;">
@@ -1061,7 +1063,7 @@
 
           <div class="max-w-4xl w-full flex flex-col items-center gap-8 mt-8">
               <div class="flex justify-center items-center gap-4 mb-8">
-                  <img src="https://imgur.com/iLnWY79.jpg" alt="Allied Executive Search Consultant Logo" class="h-56 w-auto rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Allied+Logo';" style="animation-delay: 0.1s;">
+                  <img src="https://imgur.com/iLnWY79.jpg" alt="Allied Executive Search Consultant Logo" class="h-56 w-auto rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Allied+Logo';" loading="lazy" style="animation-delay: 0.1s;">
               </div>
 
               <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed is-visible" style="animation-delay: 0.2s;">
@@ -1084,8 +1086,8 @@
         </h2>
 
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
-          <img src="https://imgur.com/DciedLb.png" alt="Quickstart Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+1';" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/fkVmbYL.png" alt="Quickstart Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+2';" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/DciedLb.png" alt="Quickstart Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+1';" loading="lazy" style="animation-delay: 0.1s;"/>
+          <img src="https://imgur.com/fkVmbYL.png" alt="Quickstart Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+2';" loading="lazy" style="animation-delay: 0.2s;"/>
         </div>
 
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
@@ -1098,8 +1100,8 @@
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Certificates of Completion</h2>
 
           <div class="max-w-4xl w-full flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
-              <img src="https://imgur.com/8LxpTQB.png" alt="Certificate of Completion 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+1';" style="animation-delay: 0.1s;"/>
-              <img src="https://imgur.com/rUkd4w9.png" alt="Certificate of Completion 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+2';" style="animation-delay: 0.2s;"/>
+              <img src="https://imgur.com/8LxpTQB.png" alt="Certificate of Completion 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+1';" loading="lazy" style="animation-delay: 0.1s;"/>
+              <img src="https://imgur.com/rUkd4w9.png" alt="Certificate of Completion 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+2';" loading="lazy" style="animation-delay: 0.2s;"/>
           </div>
       </section>
 
@@ -1146,6 +1148,8 @@
       </div>
     </footer>
 
+    <!-- Moved Tailwind CSS script to the end of body for better performance -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const greetingsTextContainer = document.getElementById('greetings-text');
