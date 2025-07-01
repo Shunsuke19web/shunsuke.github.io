@@ -20,7 +20,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        font-family: "Inter", -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -728,6 +728,15 @@
           margin-bottom: 0.5rem; /* Add some space below date */
         }
       }
+
+      /* New style for the glowing text effect */
+      .glowing-text {
+        color: #ffffff; /* White text color */
+        text-shadow:
+          0 0 8px rgba(255, 165, 0, 0.9), /* Stronger orange glow */
+          0 0 20px rgba(255, 165, 0, 0.7), /* Increased blur and spread */
+          0 0 30px rgba(255, 165, 0, 0.5); /* Even larger blur and spread */
+      }
     </style>
   </head>
 
@@ -782,7 +791,9 @@
           </div>
         </div>
 
-        <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg col-span-1" style="min-height: 160px; animation-delay: 0.2s;">
+        <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg col-span-1 cursor-pointer"
+             style="min-height: 160px; animation-delay: 0.2s;"
+             onclick="document.getElementById('credentials-section').scrollIntoView({ behavior: 'smooth' });">
           <div class="flex items-center justify-center pt-8 pb-12">
             <img src="https://imgur.com/RTlcYnw.png"
                   class="max-w-[200px] h-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/cccccc/000000?text=Signature';" /> </div>
@@ -864,7 +875,7 @@
                     alt="Instagram icon"
                     onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';" />
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" class="transition hover:scale-110" aria-label="LinkedIn Profile">
+            <a href="https://www.linkedin.com/in/shunsuke-fernando-a1937a26b/" target="_blank" class="transition hover:scale-110" aria-label="LinkedIn Profile">
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
                     class="social-icon"
                     alt="LinkedIn icon"
@@ -939,13 +950,28 @@
               <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed">
                   During my internship at State Properties Corporation, I specifically worked on the branding for these two entities, focusing on creating engaging social media postings and building a strong website SEO design to enhance their online presence and reach.
               </p>
+              <!-- State Properties Corporation Skills -->
+              <div id="state-properties-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl is-visible" style="animation-delay: 0.3s;">
+                  <span class="skill-tag">Yoast SEO</span>
+                  <span class="skill-tag">SEO</span>
+                  <span class="skill-tag">Photoshop</span>
+                  <span class="skill-tag">Lightroom</span>
+                  <span class="skill-tag">Wordpress</span>
+                  <span class="skill-tag">Divibuiler</span>
+                  <span class="skill-tag">Web Design</span>
+                  <span class="skill-tag">Web Optimization</span>
+                  <span class="skill-tag">Web traffic analysis</span>
+                  <span class="skill-tag">Content Creation</span>
+                  <span class="skill-tag">Copy Writing</span>
+                  <span class="skill-tag">Adobe Premiere</span>
+              </div>
           </div>
       </section>
 
       <!-- Section for Versailles Alabang Village's Marketing Collaterals -->
       <section id="versailles-marketing-collaterals" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">
-          Versailles Alabang Village's <br><span class="about-heading-gradient">Marketing Collaterals</span>
+          Versailles Alabang Village's <br><span class="glowing-text">Marketing Collaterals</span>
         </h2>
 
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
@@ -1012,13 +1038,20 @@
               <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed is-visible" style="animation-delay: 0.2s;">
                   During my internship, my marketing efforts were quite limited as I only focused on LinkedIn page marketing, attracting people who want to work. However, I pioneered the branding for one of their sister companies, Quickstart Solutions.
               </p>
+              <!-- Allied Executive Search Consultant Skills -->
+              <div id="allied-executive-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl is-visible" style="animation-delay: 0.3s;">
+                  <span class="skill-tag">Canva</span>
+                  <span class="skill-tag">Linkedin</span>
+                  <span class="skill-tag">Content Creation</span>
+                  <span class="skill-tag">Market Research</span>
+              </div>
           </div>
       </section>
 
       <!-- New Section for Quickstart Solution's Marketing Collaterals -->
       <section id="quickstart-marketing-collaterals" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">
-          Quickstart Solution's <br><span class="about-heading-gradient">Marketing Collaterals</span>
+          Quickstart Solution's <br><span class="glowing-text">Marketing Collaterals</span>
         </h2>
 
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
@@ -1027,8 +1060,18 @@
         </div>
 
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
-          I created these marketing collaterals using Canvas to help establish the page's branding on LinkedIn.ph and improve its overall presence.
+          I created these marketing collaterals using Canvas to help establish the page's branding on <a href="https://www.linkedin.com/company/quickstart-careers/posts/?feedView=all" target="_blank" class="text-blue-400 hover:underline">LinkedIn.ph</a> and improve its overall presence.
         </p>
+      </section>
+
+      <!-- Moved Credentials Section to the bottom -->
+      <section id="credentials-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
+          <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Certificates of Completion</h2>
+
+          <div class="max-w-4xl w-full flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
+              <img src="https://imgur.com/qqCVuS3.png" alt="Certificate of Completion 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+1';" style="animation-delay: 0.1s;"/>
+              <img src="https://imgur.com/Bq9t7An.png" alt="Certificate of Completion 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+2';" style="animation-delay: 0.2s;"/>
+          </div>
       </section>
 
     </main>
@@ -1055,6 +1098,9 @@
         const redesignedWebsiteSection = document.getElementById('redesigned-website'); // Get the new redesigned website section
         const alliedExecutiveWorksSection = document.getElementById('allied-executive-works'); // Get the new Allied Executive Search Consultant section
         const quickstartMarketingCollateralsSection = document.getElementById('quickstart-marketing-collaterals'); // Get the new Quickstart Marketing Collaterals section
+        const statePropertiesSkills = document.getElementById('state-properties-skills'); // New: State Properties Skills section
+        const alliedExecutiveSkills = document.getElementById('allied-executive-skills'); // New: Allied Executive Skills section
+        const credentialsSection = document.getElementById('credentials-section'); // New: Credentials Section
 
 
         // Constants for gradient effect (shared for consistency)
@@ -1158,6 +1204,22 @@
             quickstartImages.forEach(img => observer.observe(img));
             const quickstartParagraph = quickstartMarketingCollateralsSection.querySelector('p.text-lg');
             if (quickstartParagraph) observer.observe(quickstartParagraph);
+        }
+
+        // New: Observe State Properties Skills section
+        if (statePropertiesSkills) {
+            observer.observe(statePropertiesSkills);
+        }
+
+        // New: Observe Allied Executive Skills section
+        if (alliedExecutiveSkills) {
+            observer.observe(alliedExecutiveSkills);
+        }
+
+        // New: Observe Credentials Section
+        if (credentialsSection) {
+            const credentialsImages = credentialsSection.querySelectorAll('img');
+            credentialsImages.forEach(img => observer.observe(img));
         }
 
 
