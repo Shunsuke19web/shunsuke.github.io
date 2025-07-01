@@ -740,6 +740,7 @@
           <a href="#about" class="text-glow">About</a>
           <a href="#works" class="text-glow">Works</a>
           <a href="#contact" class="text-glow">Contact</a>
+          <a href="#blog-posts" class="text-glow">Blog</a>
         </nav>
         </div>
     </header>
@@ -939,6 +940,20 @@
           </div>
       </section>
 
+      <!-- New Section for Website's Blog Post -->
+      <section id="blog-posts" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
+        <h2 class="text-5xl font-bold mb-16 mt-8">Website's Blog Post</h2>
+
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
+          <img src="https://imgur.com/0E2EQ38.png" alt="Blog Post Image 1" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+1';" />
+          <img src="https://imgur.com/igHyaKx.png" alt="Blog Post Image 2" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+2';" />
+        </div>
+
+        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          One of the reasons for the increase in website traffic is due to the blogs that were implemented by me. I started this initiative as it is a key SEO enhancer, significantly contributing to the site's visibility and organic reach.
+        </p>
+      </section>
+
     </main>
 
     <footer class="text-center py-8 px-6">
@@ -958,8 +973,7 @@
         const aboutMeContent = document.getElementById('about-me-content'); // Get the new about me content div
         const professionalExperienceSection = document.getElementById('professional-experience-section'); // Get the new professional experience section
         const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
-        // const statePropertiesWorks = document.getElementById('state-properties-works'); // Not directly observing the section, but its content
-        // Removed projectCards observation as those elements are no longer present.
+        const blogPostsSection = document.getElementById('blog-posts'); // Get the new blog posts section
 
 
         // Constants for gradient effect (shared for consistency)
@@ -1026,10 +1040,14 @@
         timelineItems.forEach(item => {
             observer.observe(item);
         });
-
-        // Observe the logos and text within the state-properties-works section if needed for animation
-        // Since they are not complex glass-cards, a direct 'is-visible' on the section itself is often enough
-        // If specific elements inside state-properties-works need animation, add individual observations here.
+        // Observe the new blog posts section's content for animation
+        if (blogPostsSection) {
+            // No longer observing these elements for 'is-visible' as the class is removed
+            // const blogImagesContainer = blogPostsSection.querySelector('.flex.flex-col.md\\:flex-row');
+            // const blogParagraph = blogPostsSection.querySelector('p.text-lg');
+            // if (blogImagesContainer) observer.observe(blogImagesContainer);
+            // if (blogParagraph) observer.observe(blogParagraph);
+        }
 
 
         /**
