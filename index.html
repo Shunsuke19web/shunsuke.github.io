@@ -1,61 +1,67 @@
-
 <!doctype html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shunsuke's Profile</title>
+    <meta name="description" content="Professional portfolio of Shunsuke Fernando, a Marketer specializing in Digital Marketing, SEO, and Content Creation based in Cainta, Rizal.">
+    <meta name="theme-color" content="#000000">
+    <title>Shunsuke Fernando | Portfolio</title>
+    
     <!-- Preload the Inter font for faster text rendering -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO4qJgRIoovp4.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Note: For production, consider compiling Tailwind instead of using the CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-      /* Smooth scroll behavior for all elements */
-      * {
+      /* Smooth scroll behavior */
+      html {
         scroll-behavior: smooth;
       }
 
-      /* Body styling for dark background and gradient */
+      /* Body styling */
       body {
-        background-color: #000000; /* Set to pure black */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #000000;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
         margin: 0;
         padding: 0;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
+        overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        color: #fff;
+      }
+
+      /* Performance: Skip rendering off-screen content */
+      section:not(#home) {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 1000px;
       }
 
       /* Glassmorphism card styling */
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
-        border-radius: 2.5rem; /* Made rounder */
+        border-radius: 2.5rem;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow:
-          0 4px 30px rgba(0, 0, 0, 0.1),
-          inset 0 0 20px rgba(255, 255, 255, 0.03);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         position: relative;
         overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
         z-index: 0;
-        opacity: 0; /* Hidden by default for JS animation */
-        transform: translateY(50px); /* Slide up animation */
+        opacity: 0;
+        transform: translateY(50px);
+        /* GPU Acceleration hint */
+        will-change: transform, opacity;
       }
 
-      /* Class to make glass cards visible */
       .glass-card.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
 
-      /* Inner glow effect for glass cards */
+      /* Inner glow effect */
       .glass-card::before {
         content: "";
         position: absolute;
@@ -63,20 +69,22 @@
         left: -30%;
         width: 150%;
         height: 100%;
-        background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.3) 0%,
-          rgba(255, 255, 255, 0) 60%
-        );
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 60%);
         transform: rotate(25deg);
         filter: blur(60px);
         pointer-events: none;
-        transition: opacity 0.3s ease;
         opacity: 0.5;
         z-index: 1;
       }
 
-      /* Gradient text for the name */
+      .glass-card:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), inset 0 0 30px rgba(255, 255, 255, 0.06);
+        transform: scale(1.02);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+
+      /* Gradient text */
       .gradient-name {
         font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 800;
@@ -85,242 +93,100 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         line-height: 0.9;
-        letter-spacing: -0.02em;
       }
 
-      /* Hover effects for glass cards */
-      .glass-card:hover {
-        box-shadow:
-          0 8px 30px rgba(0, 0, 0, 0.15),
-          inset 0 0 30px rgba(255, 255, 255, 0.06);
-        transform: scale(1.03);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.18);
-      }
-
-      /* Rainbow border glow effect for glass cards on hover */
+      /* Rainbow border glow */
       .glass-card::after {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         border-radius: inherit;
-        padding: 3px; /* Creates the border effect */
-        background: linear-gradient(
-          270deg,
-          #f70157,
-          #1aa2fe,
-          #fdab01,
-          #a953fa,
-          #f70157
-        );
+        padding: 3px;
+        background: linear-gradient(270deg, #f70157, #1aa2fe, #fdab01, #a953fa, #f70157);
         background-size: 400% 100%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask-composite: xor;
-        -webkit-mask-composite: destination-out;
-        opacity: 0; /* Hidden by default */
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
         transition: opacity 0.4s ease;
         z-index: -1;
         animation: rainbowGlow 5s linear infinite;
       }
 
-      /* Show rainbow glow on hover */
       .glass-card:hover::after {
         opacity: 1;
       }
 
-      /* Text glow effect for navigation links */
+      /* Nav Text Glow */
       .text-glow {
         position: relative;
         border-radius: 0.75rem;
-        overflow: hidden;
-        z-index: 0;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
       }
-
-      /* Text glow hover effects */
       .text-glow:hover {
         color: #ffffff;
         text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
         background: rgba(255, 255, 255, 0.05);
       }
 
-      /* Button glow effect styling */
-      .btn-glow {
-        position: relative;
-        border-radius: 1rem; /* Made rounder */
-        background-color: #1c1c1c;
-        color: white;
-        padding: 0.5rem 1.25rem;
-        font-weight: 500;
-        overflow: visible;
-        z-index: 0;
-        border: 1px solid transparent;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.95rem;
-      }
-
-      /* Rainbow border glow for buttons */
-      .btn-glow::after {
-        content: "";
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        border-radius: inherit;
-        padding: 3px;
-        background: linear-gradient(
-          270deg,
-          #f70157,
-          #1aa2fe,
-          #fdab01,
-          #a953fa,
-          #f70157
-        );
-        background-size: 400% 100%;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask-composite: xor;
-        -webkit-mask-composite: destination-out;
-        opacity: 1;
-        transition: opacity 0.4s ease;
-        z-index: -1;
-        animation: rainbowGlow 20s linear infinite;
-      }
-
-      /* Button hover effects */
-      .btn-glow:hover {
-        color: #fff;
-        transform: scale(1.05);
-        background-color: #2c2c2c;
-      }
-
-      /* Styling for arrow elements on glass cards */
+      /* Arrow element */
       .glass-arrow-element {
         position: absolute;
         bottom: 0.75rem;
         right: 1.5rem;
-        background: transparent;
-        border: none;
         padding: 0.5rem;
         color: white;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.3s ease;
         z-index: 2;
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
       }
-
-
-      /* SVG icon within arrow element */
+      .glass-arrow-element:hover {
+        transform: translateX(5px);
+      }
       .glass-arrow-element svg {
         width: 2rem;
         height: 2rem;
         fill: currentColor;
         filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
-        transition: all 0.3s ease;
       }
 
-      /* Arrow element hover effects */
-      .glass-arrow-element:hover {
-        transform: translateX(5px);
-      }
-
-      /* Arrow element hover effects on SVG */
-      .glass-arrow-element:hover svg {
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
-      }
-
-      /* Hero greeting text styling */
+      /* Greeting Text */
       #greetings-text {
-        font-size: clamp(7rem, 12vw, 6rem);
+        font-size: clamp(4rem, 12vw, 6rem);
         line-height: 1;
-        font-weight: 800; /* Changed font-weight to 800 for bolder text */
-        letter-spacing: 0.02em;
-        position: relative;
-        z-index: 10;
+        font-weight: 800;
         height: 6rem;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-
-      /* Style for animating greeting spans */
       #greetings-text span {
         position: absolute;
         opacity: 0;
         transition: opacity 1s ease-in-out;
+        will-change: opacity;
       }
 
-      /* My Professional Profile specific styling */
-      #profile-heading {
-        /* Adjusted font size and weight to match Professional Experiences heading */
-        font-size: clamp(3rem, 5vw, 3.5rem); /* Equivalent to Tailwind text-5xl for responsiveness */
-        font-weight: 700; /* Equivalent to Tailwind font-bold */
-        line-height: 1;
-        letter-spacing: 0.03em;
-        position: relative;
-      }
-
-      /* Class to make elements visible (used by IntersectionObserver for glass cards) */
-      .is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Keyframe animation for rainbow glow */
       @keyframes rainbowGlow {
-        0% {
-          background-position: 0% 50%;
-        }
-        100% {
-          background-position: 100% 50%;
-        }
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
       }
 
-      /* Animation for the moving gradient background */
-      @keyframes elegantGradientMove {
-        0% { background-position: 0% 0%; }
-        25% { background-position: 100% 0%; }
-        50% { background-position: 100% 100%; }
-        75% { background-position: 0% 100%; }
-        100% { background-position: 0% 0%; }
-      }
-
-      /* Enhanced navbar with full width and no rounded corners */
+      /* Navbar */
       .navbar {
         background: transparent;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid transparent;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        border-radius: 0; /* No border-radius */
-        margin: 0; /* No margin */
-        width: 100%; /* Full width */
+        transition: background 0.3s ease, box-shadow 0.3s ease;
       }
-
-      /* Navbar styling when scrolled */
       .navbar.scrolled {
-        background: #0f0f0f;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border-color: transparent;
+        background: rgba(15, 15, 15, 0.9);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       }
 
-      /* Improved skill tags */
+      /* Skill Tags */
       .skill-tag {
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.12);
@@ -328,228 +194,70 @@
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
         font-weight: 500;
-        color: #ffffff;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
       }
-
-      /* Skill tag hover effects */
       .skill-tag:hover {
         background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.25);
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
       }
 
-      /* Improved profile image styling */
+      /* Profile Image */
       .profile-image {
-        border-radius: 2.5rem; /* Made rounder */
+        border-radius: 2.5rem;
         object-fit: cover;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.3s ease;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       }
+      .profile-image:hover { transform: scale(1.05); }
 
-      /* Profile image hover effects */
-      .profile-image:hover {
-        transform: scale(1.05);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-      }
-
-      /* Social icons enhancement */
-      .social-icon {
-        width: 4rem;
-        height: 4rem;
-        border-radius: 1.5rem; /* Made rounder */
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        filter: brightness(0.9);
-      }
-
-      /* Social icon hover effects */
-      .social-icon:hover {
-        transform: translateY(-4px) scale(1.1);
-        filter: brightness(1.1);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Mobile responsiveness improvements */
-      @media (max-width: 768px) {
-        #greetings-text {
-          font-size: 4rem; /* Adjusted for mobile */
-          height: 4rem; /* Adjusted height for mobile */
-        }
-
-        #profile-heading {
-          font-size: 3rem; /* Adjust for mobile to match 5xl */
-        }
-
-        .glass-card {
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 1.5rem !important; /* Adjust padding for mobile */
-        }
-
-        .glass-card img {
-          margin-bottom: 1rem;
-        }
-
-        .gradient-name {
-          font-size: 2.5rem;
-        }
-
-        /* Adjust grid columns for mobile */
-        .grid-cols-1.md\:grid-cols-4 {
-          grid-template-columns: 1fr;
-        }
-
-        .col-span-1.md\:col-span-2 {
-          grid-column: span 1;
-        }
-
-        .hidden.md\:flex {
-          display: none;
-        }
-
-        /* Adjust arrow elements for mobile */
-        .glass-arrow-element {
-          bottom: 0.5rem;
-          right: 1rem;
-          padding: 0.3rem;
-        }
-
-        .glass-arrow-element svg {
-          width: 1.5rem;
-          height: 1.5rem;
-        }
-
-        /* Adjust navbar for mobile */
-        .navbar {
-          margin: 0; /* Ensures full width on mobile too */
-          width: 100%; /* Ensures full width on mobile too */
-        }
-        
-        /* Mobile specific adjustments for minimized home content */
-        #home-gradient-bg.minimized {
-          transform: scale(0.85) translateX(0.75rem) translateY(0.75rem) !important; /* Adjusted for mobile */
-          border-radius: 2.5rem !important; /* Apply border-radius on mobile */
-        }
-      }
-
-      /* Performance optimization for reduced motion preference */
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-
-      /* Better focus states for accessibility */
-      .glass-card:focus,
-      .btn-glow:focus,
-      .text-glow:focus {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
-        outline-offset: 2px;
-      }
-
-      /* Custom style for the gradient heading, using colors from your image */
+      /* Gradient Header */
       .about-heading-gradient {
-        background-image: linear-gradient(90deg, #00BFFF, #9370DB, #FF007F, #FFA500); /* Vibrant blue, medium purple, rose, orange */
+        background-image: linear-gradient(90deg, #00BFFF, #9370DB, #FF007F, #FFA500);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        color: transparent; /* Fallback for non-webkit browsers */
+        color: transparent;
       }
 
-      /* Style for the animating linear gradient background in the home section */
+      /* Home Gradient Background */
       #home-gradient-bg {
         background-image: linear-gradient(135deg, rgb(0, 191, 255), rgb(147, 112, 219), rgb(255, 0, 127), rgb(255, 165, 0), rgb(0, 191, 255));
-        background-position: 0% 0%;
-        background-repeat: no-repeat;
-        /* Initial state of background-size and opacity for JS to control */
         background-size: 800% 800%;
-        opacity: 1;
-        transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out; /* Smooth transition for transform and border-radius */
-        border-radius: 0; /* Initial border-radius */
+        transition: opacity 0.1s linear; /* Fast transition for scroll sync */
+        will-change: transform, opacity, border-radius;
         animation: elegantGradientMove 30s ease-in-out infinite alternate;
       }
-
-      /* Styles for the minimized home section content */
-      #home-gradient-bg.minimized {
-        transform: scale(0.85) translateX(0.75rem) translateY(0.75rem); /* Small and top-left */
-        border-radius: 2.5rem; /* Apply border-radius when minimized */
-      }
       
-      /* New style for the main profile introduction section (not a glass-card) */
-      #main-profile-section {
-        background-color: #1a1a1a; /* A slightly lighter dark background */
-        border-radius: 2.5rem; /* Keep rounded corners for consistency */
-        padding: 2.5rem; /* Generous padding */
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-        opacity: 1; /* Always visible */
-        transform: translateY(0); /* No initial slide-up animation */
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transitions for hover etc. */
+      @keyframes elegantGradientMove {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
       }
 
-      #main-profile-section:hover {
-        transform: scale(1.01); /* Slight zoom on hover */
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      #home-gradient-bg.minimized {
+        transform: scale(0.85) translateX(0.75rem) translateY(0.75rem);
+        border-radius: 2.5rem;
       }
 
-      /* Specific styling for the About Me content section - REMOVED ALL BOX PROPERTIES */
+      /* Main Content Styles */
       #about-me-content {
-        background-color: transparent; /* Remove background color */
-        border-radius: 0; /* Remove border-radius */
-        box-shadow: none; /* Remove box-shadow */
-        padding: 0; /* Remove padding */
-        color: #e0e0e0; /* Light gray text for readability */
-        line-height: 1.6; /* Improved line spacing */
-        text-align: left; /* Align text to left */
-        opacity: 0; /* Hidden by default for JS animation */
-        transform: translateY(50px); /* Slide up animation */
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        display: flex; /* Use flexbox for image and text alignment */
-        align-items: flex-start; /* Align items to the top */
-        gap: 2rem; /* Space between image and text */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
       }
-
       #about-me-content.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
 
-      #about-me-content strong {
-        color: #ffffff; /* Make key terms stand out */
-        font-weight: 600;
-      }
-      
-      #about-me-content .profile-image-small {
-        border-radius: 2.5rem; /* Consistent rounded corners */
-        object-fit: cover;
-        flex-shrink: 0; /* Prevent image from shrinking */
-        width: 150px; /* Smaller size for this section */
-        height: 150px; /* Smaller size for this section */
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-      }
-
-      @media (max-width: 768px) {
-        #about-me-content {
-          flex-direction: column; /* Stack image and text on mobile */
-          align-items: center; /* Center items when stacked */
-          text-align: center; /* Center text when stacked */
-        }
-      }
-
-      /* Timeline specific styles */
+      /* Timeline */
       .timeline {
         position: relative;
         padding: 2rem 0;
-        width: 90%; /* Keep it responsive */
-        max-width: 960px; /* Wider max-width for the overall timeline container */
+        width: 90%;
+        max-width: 960px;
         margin: 0 auto;
       }
-
       .timeline::before {
         content: '';
         position: absolute;
@@ -557,13 +265,9 @@
         top: 0;
         bottom: 0;
         width: 2px;
-        background: linear-gradient(to bottom, #00BFFF, #9370DB, #FF007F, #FFA500); /* Gradient line */
+        background: linear-gradient(to bottom, #00BFFF, #9370DB, #FF007F, #FFA500);
         transform: translateX(-50%);
-        /* Elegant glow effect on the timeline line */
-        box-shadow: 0 0 5px rgba(0, 191, 255, 0.4), /* Subtle blue glow */
-                    0 0 8px rgba(147, 112, 219, 0.4), /* Subtle purple glow */
-                    0 0 10px rgba(255, 0, 127, 0.4), /* Subtle rose glow */
-                    0 0 12px rgba(255, 165, 0, 0.4); /* Subtle orange glow */
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
       }
 
       .timeline-item {
@@ -575,200 +279,142 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        opacity: 0; /* Start invisible */
-        transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition for all properties */
-        /* Set width for the boxes */
-        width: calc(50% - 40px); /* 45% of parent width, minus space for the dot/line */
-        top: 0; /* Reset */
-        left: auto; /* Reset */
-        right: auto; /* Reset */
-        clear: both; /* Clear floats for each item */
-        /* Initial subtle shadow */
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
-                    inset 0 0 20px rgba(255, 255, 255, 0.03);
-      }
-
-      .timeline-item.is-visible {
-        opacity: 1; /* Fade in */
-        transform: translateX(0); /* Slide to original position */
-        /* Subtle glow effect when visible */
-        box-shadow: 0 0 6px rgba(0, 191, 255, 0.3), /* Blue glow */
-                    0 0 10px rgba(147, 112, 219, 0.3), /* Purple glow */
-                    0 0 14px rgba(255, 0, 127, 0.3), /* Rose glow */
-                    0 0 18px rgba(255, 165, 0, 0.3); /* Orange glow */
-      }
-
-      /* Subtle glow effect on hover for timeline items */
-      .timeline-item:hover {
-        box-shadow: 0 0 10px rgba(0, 191, 255, 0.5),
-                    0 0 16px rgba(147, 112, 219, 0.5),
-                    0 0 22px rgba(255, 0, 127, 0.5),
-                    0 0 28px rgba(255, 165, 0, 0.5);
-        transform: scale(1.03);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.18);
-      }
-
-
-      .timeline-item:nth-child(odd) {
-        float: left; /* Float left for odd items */
-        margin-right: 40px; /* Space from the center line */
-        transform: translateX(-70px); /* Initial slide from left (more pronounced) */
-        text-align: right; /* Content aligned right */
-      }
-
-      .timeline-item:nth-child(odd).is-visible {
-        transform: translateX(0);
-      }
-
-      .timeline-item:nth-child(even) {
-        float: right; /* Float right for even items */
-        margin-left: 40px; /* Space from the center line */
-        transform: translateX(70px); /* Initial slide from right (more pronounced) */
-        text-align: left; /* Content aligned left */
+        opacity: 0;
+        transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        width: calc(50% - 40px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       }
       
-      .timeline-item:nth-child(even).is-visible {
+      .timeline-item.is-visible {
+        opacity: 1;
         transform: translateX(0);
       }
+      
+      .timeline-item:nth-child(odd) {
+        float: left;
+        margin-right: 40px;
+        transform: translateX(-50px);
+        text-align: right;
+      }
+      
+      .timeline-item:nth-child(even) {
+        float: right;
+        margin-left: 40px;
+        transform: translateX(50px);
+        text-align: left;
+      }
 
-      .timeline-item::before { /* The circle on the line */
+      .timeline-item::before {
         content: '';
         position: absolute;
-        top: 50%; /* Center vertically with the item */
+        top: 50%;
         width: 1rem;
         height: 1rem;
-        background: linear-gradient(45deg, #00BFFF, #FF007F); /* Vibrant dot color */
+        background: linear-gradient(45deg, #00BFFF, #FF007F);
         border-radius: 50%;
         transform: translateY(-50%);
-        border: 3px solid #000; /* Thicker border for prominence */
+        border: 3px solid #000;
         z-index: 10;
       }
-
-      .timeline-item:nth-child(odd)::before {
-        right: -48px; /* Position relative to the item's right edge, 40px margin + 8px dot center */
-      }
-
-      .timeline-item:nth-child(even)::before {
-        left: -48px; /* Position relative to the item's left edge */
-      }
-
-      .timeline-content h3 {
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 0.25rem; /* Reduced margin for company name */
-        color: #fff; /* Ensure heading is white */
-      }
+      .timeline-item:nth-child(odd)::before { right: -48px; }
+      .timeline-item:nth-child(even)::before { left: -48px; }
 
       .company-name {
-          font-size: 1.2rem; /* Smaller than h3, larger than p */
-          font-weight: 500;
-          /* Apply gradient color to company name */
-          background-image: linear-gradient(90deg, #00BFFF, #9370DB, #FF007F, #FFA500); /* Vibrant blue, medium purple, rose, orange */
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: transparent; /* Fallback for non-webkit browsers */
-          margin-bottom: 0.75rem; /* Space between company and description */
-      }
-
-      .timeline-content p {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #c0c0c0; /* Lighter gray for readability */
+        font-weight: 500;
+        background-image: linear-gradient(90deg, #00BFFF, #9370DB, #FF007F, #FFA500);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
       }
 
       .timeline-date {
         position: absolute;
-        top: -2.5rem; /* Position above the box, increased value */
+        top: -2.5rem;
         font-weight: 600;
         color: #e0e0e0;
-        font-size: 1.1rem; /* Slightly bigger font size */
-        z-index: 5;
-        background-color: #000; /* Background to make date readable over line */
+        background-color: #000;
         padding: 0.2rem 0.5rem;
         border-radius: 0.5rem;
       }
-      
-      .timeline-item:nth-child(odd) .timeline-date {
-        right: 0; /* Align date to the right of the box */
-        text-align: right;
-      }
+      .timeline-item:nth-child(odd) .timeline-date { right: 0; }
+      .timeline-item:nth-child(even) .timeline-date { left: 0; }
 
-      .timeline-item:nth-child(even) .timeline-date {
-        left: 0; /* Align date to the left of the box */
-        text-align: left;
-      }
-
-      @media (max-width: 768px) {
-        .timeline::before {
-          left: 1.5rem; /* Align line to left on mobile */
-          transform: translateX(0);
-        }
-
-        .timeline-item {
-          width: 100%;
-          float: none; /* Remove floats */
-          margin-left: 0;
-          margin-right: 0;
-          padding-left: 3rem; /* Space for dot and line */
-          text-align: left !important;
-          transform: translateY(50px) !important; /* Restore initial mobile transform */
-        }
-
-        .timeline-item:nth-child(odd)::before,
-        .timeline-item:nth-child(even)::before {
-          left: 0.75rem; /* Align dot with line on mobile */
-          right: auto;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-date,
-        .timeline-item:nth-child(even) .timeline-date {
-          position: relative; /* Revert to relative for stacking */
-          top: auto;
-          left: auto;
-          right: auto;
-          text-align: center; /* Center dates on mobile */
-          margin-bottom: 0.5rem; /* Add some space below date */
-        }
-      }
-
-      /* New style for the glowing text effect */
+      /* Glowing Text */
       .glowing-text {
-        color: #ffffff; /* White text color */
-        text-shadow:
-          0 0 8px rgba(255, 165, 0, 0.9), /* Stronger orange glow */
-          0 0 20px rgba(255, 165, 0, 0.7), /* Increased blur and spread */
-          0 0 30px rgba(255, 165, 0, 0.5); /* Even larger blur and spread */
+        color: #ffffff;
+        text-shadow: 0 0 8px rgba(255, 165, 0, 0.9), 0 0 20px rgba(255, 165, 0, 0.7);
       }
 
-      /* Styles for the copy button and feedback message */
+      /* Copy Button */
       .copy-button {
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
         padding: 0.3rem 0.7rem;
         border-radius: 0.5rem;
-        font-size: 0.8rem;
         cursor: pointer;
-        transition: background-color 0.2s ease, border-color 0.2s ease;
+        transition: background-color 0.2s;
       }
-
-      .copy-button:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-
+      .copy-button:hover { background: rgba(255, 255, 255, 0.2); }
       .copy-feedback {
-        color: #4ade80; /* Green for success */
+        color: #4ade80;
         font-size: 0.8rem;
         margin-left: 0.5rem;
         opacity: 0;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.3s;
+      }
+      .copy-feedback.show { opacity: 1; }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .glass-card {
+          flex-direction: column;
+          text-align: center;
+          padding: 1.5rem !important;
+        }
+        .gradient-name { font-size: 2.5rem; }
+        .glass-arrow-element { bottom: 0.5rem; right: 1rem; }
+        
+        .timeline::before { left: 1.5rem; }
+        .timeline-item {
+          width: 100%;
+          float: none;
+          margin: 0 0 2rem 0;
+          padding-left: 3rem;
+          text-align: left !important;
+        }
+        .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+          transform: translateY(30px);
+        }
+        .timeline-item:nth-child(odd)::before, .timeline-item:nth-child(even)::before {
+          left: 0.75rem;
+          right: auto;
+        }
+        .timeline-item:nth-child(odd) .timeline-date, .timeline-item:nth-child(even) .timeline-date {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+          text-align: left;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+        #about-me-content {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
       }
 
-      .copy-feedback.show {
-        opacity: 1;
+      /* Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
       }
     </style>
   </head>
@@ -783,75 +429,63 @@
           <a href="#state-properties-works" class="text-glow">Works</a>
           <a href="#contact" class="text-glow">Contact</a>
         </nav>
-        </div>
+      </div>
     </header>
 
     <main>
       <section id="home" class="flex flex-col items-center justify-center min-h-screen px-6 relative overflow-hidden">
         <div id="home-gradient-bg" class="absolute inset-0 z-0"></div>
-        <h2 id="greetings-text" class="text-white text-center relative z-10">
-          </h2>
-          <a href="#about" class="text-white text-lg mt-8 flex items-center space-x-2 text-glow" aria-label="Learn More about Shunsuke">
-            <span>Learn More</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </a>
+        <h2 id="greetings-text" class="text-white text-center relative z-10"></h2>
+        <a href="#about" class="text-white text-lg mt-8 flex items-center space-x-2 text-glow" aria-label="Learn More about Shunsuke">
+          <span>Learn More</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </a>
       </section>
 
       <section id="about" class="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-32 pb-32 md:grid-cols-4 relative overflow-hidden">
-
-        <h2 id="profile-heading" class="col-span-full text-center mb-16 mt-8 about-heading-gradient">
+        <h2 id="profile-heading" class="col-span-full text-center mb-16 mt-8 about-heading-gradient text-5xl font-bold">
           My Professional Profile
         </h2>
 
         <div class="glass-card flex flex-row items-center gap-6 p-6 shadow-lg col-span-1 md:col-span-2 cursor-pointer"
-              style="min-height: 280px; animation-delay: 0.1s;"
-              onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
+             style="min-height: 280px;"
+             onclick="document.getElementById('about-me-section').scrollIntoView({ behavior: 'smooth' });">
           <img src="https://imgur.com/WERo5f1.png"
-                class="profile-image h-48 w-48"
-                alt="Profile picture of Shunsuke Fernando, a marketer from Cainta Rizal"
-                onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/000000?text=Profile';"
-                width="192" height="192" />
+               class="profile-image h-48 w-48"
+               alt="Shunsuke Fernando"
+               fetchpriority="high"
+               width="192" height="192" />
           <div class="flex flex-col justify-center text-left">
             <p class="mb-1 text-lg text-gray-400">Marketer</p>
             <h2 class="gradient-name mt-2 mb-1 md:mb-2">Shunsuke Fernando</h2>
             <p class="max-w-md text-gray-400 text-xs leading-relaxed">I am a Marketing Graduate from Cainta Rizal, passionate about digital innovation and creative solutions.</p>
           </div>
           <div class="glass-arrow-element" aria-hidden="true" style="pointer-events: none;">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </div>
         </div>
 
         <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg col-span-1 cursor-pointer"
-             style="min-height: 160px; animation-delay: 0.2s;"
+             style="min-height: 160px; transition-delay: 50ms;"
              onclick="document.getElementById('credentials-section').scrollIntoView({ behavior: 'smooth' });">
           <div class="flex items-center justify-center pt-8 pb-12">
-            <img src="https://imgur.com/RTlcYnw.png"
-                  class="max-w-[200px] h-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/cccccc/000000?text=Signature';"
-                  width="200" height="100" />
+            <img src="https://imgur.com/RTlcYnw.png" class="max-w-[200px] h-auto" width="200" height="100" alt="Signature" loading="lazy" />
           </div>
           <div class="absolute bottom-6 left-6">
             <p class="text-sm text-gray-400">More About Me</p>
             <h3 class="text-xl font-semibold text-white">Credentials</h3>
           </div>
           <div class="glass-arrow-element" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </div>
         </div>
 
         <div class="glass-card relative flex flex-col justify-between p-6 shadow-lg col-span-1 cursor-pointer"
-             style="min-height: 160px; animation-delay: 0.3s;"
+             style="min-height: 160px; transition-delay: 100ms;"
              onclick="document.getElementById('state-properties-works').scrollIntoView({ behavior: 'smooth' });">
           <div class="flex items-center justify-center pt-8 pb-16">
             <div class="w-44 h-24 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center border border-gray-600">
-              <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-              </svg>
+              <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
@@ -859,18 +493,14 @@
             <h3 class="text-xl font-semibold text-white">Portfolio</h3>
           </div>
           <div class="glass-arrow-element" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </div>
         </div>
 
-        <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg col-span-1" style="animation-delay: 0.4s; min-height: 120px;">
+        <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg col-span-1" style="min-height: 120px; transition-delay: 150ms;">
           <div class="flex items-center justify-center pt-3 pb-2">
             <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1_0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1_0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             </div>
           </div>
           <div class="absolute bottom-4 left-4">
@@ -878,46 +508,35 @@
             <h3 class="text-lg font-semibold text-white">Download</h3>
           </div>
           <a href="uploaded:Shunsuke_Fernando (3).pdf" download="Shunsuke_Fernando_CV.pdf" class="glass-arrow-element" aria-label="Download CV" style="pointer-events: auto; cursor: pointer;">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </a>
         </div>
 
-        <div id="specializations-card" class="glass-card relative col-span-1 md:col-span-2 flex flex-col justify-between p-10 shadow-lg cursor-pointer" style="min-height: 140px; animation-delay: 0.2s;" onclick="document.getElementById('professional-experience-section').scrollIntoView({ behavior: 'smooth' });">
+        <div id="specializations-card" class="glass-card relative col-span-1 md:col-span-2 flex flex-col justify-between p-10 shadow-lg cursor-pointer" style="min-height: 140px; transition-delay: 200ms;" onclick="document.getElementById('professional-experience-section').scrollIntoView({ behavior: 'smooth' });">
           <div class="flex max-w-xl flex-wrap items-center justify-center gap-3 pt-1 pb-10">
             <span class="skill-tag">SEO</span>
             <span class="skill-tag">Digital Marketing</span>
             <span class="skill-tag">Photoshop</span>
             <span class="skill-tag">Content Creating</span>
             <span class="skill-tag">Website Designing</span>
-            <span class="skill-tag">And More...</span> </div>
+            <span class="skill-tag">And More...</span> 
+          </div>
           <div class="absolute bottom-4 left-4">
             <p class="text-sm text-gray-400">More About Me</p>
             <h3 class="text-lg font-semibold text-white">Specializations</h3>
           </div>
           <div class="glass-arrow-element" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </div>
         </div>
 
-        <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg col-span-1" style="animation-delay: 0.5s; min-height: 120px;">
+        <div class="glass-card relative flex flex-col justify-between p-4 shadow-lg col-span-1" style="min-height: 120px; transition-delay: 250ms;">
           <div class="flex items-center justify-center gap-4 pt-6 pb-4">
             <a href="https://www.instagram.com/" target="_blank" class="transition hover:scale-110" aria-label="Instagram Profile">
-              <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-                    class="social-icon"
-                    alt="Instagram icon"
-                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=IG';"
-                    width="64" height="64" />
+              <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" class="social-icon" alt="Instagram" width="64" height="64" loading="lazy" />
             </a>
             <a href="https://www.linkedin.com/in/shunsuke-fernando-a1937a26b/" target="_blank" class="transition hover:scale-110" aria-label="LinkedIn Profile">
-              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-                    class="social-icon"
-                    alt="LinkedIn icon"
-                    onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/000000?text=LI';"
-                    width="64" height="64" />
+              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="social-icon" alt="LinkedIn" width="64" height="64" loading="lazy" />
             </a>
           </div>
           <div class="absolute bottom-4 left-4">
@@ -925,20 +544,14 @@
             <h3 class="text-lg font-semibold text-white">Socials</h3>
           </div>
           <div class="glass-arrow-element" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
           </div>
         </div>
       </section>
 
       <section id="about-me-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex justify-center items-center">
         <div class="max-w-6xl w-full flex flex-col md:flex-row items-center md:items-start gap-8">
-          <img src="https://imgur.com/WERo5f1.png"
-                class="profile-image-small flex-shrink-0"
-                alt="Profile picture of Shunsuke Fernando"
-                onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/000000?text=Profile';"
-                width="150" height="150" />
+          <img src="https://imgur.com/WERo5f1.png" class="profile-image w-[150px] h-[150px] flex-shrink-0" alt="Shunsuke Fernando" width="150" height="150" loading="lazy" />
           <div id="about-me-content" class="text-lg leading-relaxed flex-grow text-center md:text-left">
             <h2 class="text-5xl font-bold mb-8">About Me</h2>
             <p class="text-justify">
@@ -950,27 +563,21 @@
 
       <section id="professional-experience-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Professional Experiences</h2>
-
           <div class="timeline">
               <div class="timeline-item cursor-pointer" onclick="document.getElementById('state-properties-works').scrollIntoView({ behavior: 'smooth' });">
                   <span class="timeline-date">Feb - Apr, 2025</span>
                   <div class="timeline-content">
-                      <h3>Digital Marketing Intern</h3>
-                      <p class="company-name">STATE PROPERTIES CORPORATION</p>
-                      <p>
-                          Enhanced website design, SEO, and speed using Divi Builder. Created content (Photoshop, articles, video/photo for house models) and edited visuals using Adobe tools.
-                      </p>
+                      <h3 class="text-3xl font-semibold mb-1">Digital Marketing Intern</h3>
+                      <p class="company-name text-xl mb-3">STATE PROPERTIES CORPORATION</p>
+                      <p class="text-gray-300">Enhanced website design, SEO, and speed using Divi Builder. Created content (Photoshop, articles, video/photo for house models) and edited visuals using Adobe tools.</p>
                   </div>
               </div>
-
               <div class="timeline-item cursor-pointer" onclick="document.getElementById('allied-executive-works').scrollIntoView({ behavior: 'smooth' });">
                   <span class="timeline-date">Aug - Oct, 2024</span>
                   <div class="timeline-content">
-                      <h3>Digital Marketing Intern</h3>
-                      <p class="company-name">ALLIED EXECUTIVE SEARCH CONSULTANT</p>
-                      <p>
-                          Managed Facebook and LinkedIn accounts. Tracked engagement, shared content, responded to inquiries, and planned marketing collateral. Conducted trend analysis.
-                      </p>
+                      <h3 class="text-3xl font-semibold mb-1">Digital Marketing Intern</h3>
+                      <p class="company-name text-xl mb-3">ALLIED EXECUTIVE SEARCH CONSULTANT</p>
+                      <p class="text-gray-300">Managed Facebook and LinkedIn accounts. Tracked engagement, shared content, responded to inquiries, and planned marketing collateral. Conducted trend analysis.</p>
                   </div>
               </div>
               <div style="clear: both;"></div>
@@ -979,20 +586,15 @@
 
       <section id="state-properties-works" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">State Properties Corporation</h2>
-
           <div class="max-w-4xl w-full flex flex-col items-center gap-8 mt-8">
               <div class="flex justify-center items-center gap-4 mb-8">
-                  <img src="https://imgur.com/AqNGsj5.png" alt="State Properties Logo 1" class="h-56 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Logo1';"
-                  width="224" height="224">
-                  <img src="https://imgur.com/nFn1Hzy.png" alt="State Properties Logo 2" class="h-56 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Logo2';"
-                  width="224" height="224">
+                  <img src="https://imgur.com/AqNGsj5.png" alt="State Properties Logo 1" class="h-56 w-auto" width="224" height="224" loading="lazy">
+                  <img src="https://imgur.com/nFn1Hzy.png" alt="State Properties Logo 2" class="h-56 w-auto" width="224" height="224" loading="lazy">
               </div>
-
               <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed">
                   During my internship at State Properties Corporation, I specifically worked on the branding for these two entities, focusing on creating engaging social media postings and building a strong website SEO design to enhance their online presence and reach.
               </p>
-              <!-- State Properties Corporation Skills -->
-              <div id="state-properties-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl is-visible" style="animation-delay: 0.3s;">
+              <div id="state-properties-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl opacity-0 transition-opacity duration-700">
                   <span class="skill-tag">Yoast SEO</span>
                   <span class="skill-tag">SEO</span>
                   <span class="skill-tag">Photoshop</span>
@@ -1009,78 +611,59 @@
           </div>
       </section>
 
-      <!-- Section for Versailles Alabang Village's Marketing Collaterals -->
       <section id="versailles-marketing-collaterals" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">
           Versailles Alabang Village's <br><span class="glowing-text">Marketing Collaterals</span>
         </h2>
-
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
-          <img src="https://imgur.com/AcsSeOY.jpg" alt="Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+1';" loading="lazy" width="600" height="400" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/pfEzC6h.jpg" alt="Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+2';" loading="lazy" width="600" height="400" style="animation-delay: 0.2s;"/>
-          <img src="https://imgur.com/cgOXMTY.jpg" alt="Marketing Collateral 3" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Marketing+Collateral+3';" loading="lazy" width="600" height="400" style="animation-delay: 0.3s;"/>
+          <img src="https://imgur.com/AcsSeOY.jpg" alt="Marketing Collateral 1" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
+          <img src="https://imgur.com/pfEzC6h.jpg" alt="Marketing Collateral 2" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
+          <img src="https://imgur.com/cgOXMTY.jpg" alt="Marketing Collateral 3" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
         </div>
-
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
           Here are some of the marketing collaterals that I made for their social media engagement using Photoshop. All of these, and more, can be found on their social media page: <a href="https://www.facebook.com/versaillesalabangofficial/" target="_blank" class="text-blue-400 hover:underline">Versailles Alabang Village</a>.
         </p>
       </section>
 
-      <!-- Section for Website's Blog Post -->
       <section id="blog-posts" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
-        <!-- New header for Versailles Town Plaza's Website -->
         <h2 class="text-5xl font-bold mb-8 text-left">Versailles Town Plaza's <span class="about-heading-gradient">Website</span></h2>
-
-        <!-- Container for text on left and image on right -->
         <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 mb-16">
-          <!-- Text explaining traffic increase -->
           <p class="text-lg text-gray-300 max-w-xl leading-relaxed text-center md:text-left md:w-1/2">
             During my internship, I successfully increased <a href="https://vtpalabang.com.ph/" target="_blank" class="text-blue-400 hover:underline">Versailles Town Plaza's website</a> total traffic by 100 percent. This significant growth was achieved organically, without the use of paid advertisements, demonstrating effective SEO and content strategies.
           </p>
-          <!-- Image on the right -->
-          <img src="https://imgur.com/SJtXPKM.png" alt="Website Traffic Increase" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Traffic+Image';" loading="lazy" width="600" height="400" />
+          <img src="https://imgur.com/SJtXPKM.png" alt="Website Traffic Increase" class="w-full md:w-1/2 rounded-lg shadow-lg" width="600" height="400" loading="lazy" />
         </div>
-
         <h2 class="text-5xl font-bold mb-16 mt-8">Website's Blog Post</h2>
-
         <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
-          <img src="https://imgur.com/0E2EQ38.png" alt="Blog Post Image 1" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+1';" loading="lazy" width="600" height="400" />
-          <img src="https://imgur.com/F7hATmc.jpg" alt="Blog Post Image 2" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Blog+Image+2';" loading="lazy" width="600" height="400" />
+          <img src="https://imgur.com/0E2EQ38.png" alt="Blog Post Image 1" class="w-full md:w-1/2 rounded-lg shadow-lg" width="600" height="400" loading="lazy" />
+          <img src="https://imgur.com/F7hATmc.jpg" alt="Blog Post Image 2" class="w-full md:w-1/2 rounded-lg shadow-lg" width="600" height="400" loading="lazy" />
         </div>
-
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
           One of the reasons for the increase in website traffic is due to the blogs that were implemented by me. I started this initiative as it is a key SEO enhancer, significantly contributing to the site's visibility and organic reach.
         </p>
       </section>
 
-      <!-- New Section for Redesigned Website -->
       <section id="redesigned-website" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">Redesigned the Website using Wordpress Divibuilder</h2>
-
         <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
-          <img src="https://imgur.com/GuHxXxZ.jpg" alt="Redesigned Website Screenshot 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+1';" loading="lazy" width="600" height="400" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/FpKjK66.jpg" alt="Redesigned Website Screenshot 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Redesign+Image+2';" loading="lazy" width="600" height="400" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/GuHxXxZ.jpg" alt="Redesigned Website 1" class="w-full md:w-1/2 rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
+          <img src="https://imgur.com/FpKjK66.jpg" alt="Redesigned Website 2" class="w-full md:w-1/2 rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
         </div>
-
-        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed is-visible" style="animation-delay: 0.3s;">
+        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed opacity-0 transition-opacity duration-700">
           I redesigned the whole website by removing some elements that weren't useful to the site, fixing the formation of some elements, correcting grammar, and making it modern-like.
         </p>
       </section>
 
-      <!-- Allied Executive Search Consultant section moved to the bottom -->
       <section id="allied-executive-works" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Allied Executive Search Consultant</h2>
-
           <div class="max-w-4xl w-full flex flex-col items-center gap-8 mt-8">
               <div class="flex justify-center items-center gap-4 mb-8">
-                  <img src="https://imgur.com/iLnWY79.jpg" alt="Allied Executive Search Consultant Logo" class="h-56 w-auto rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/000000?text=Allied+Logo';" loading="lazy" width="224" height="224" style="animation-delay: 0.1s;">
+                  <img src="https://imgur.com/iLnWY79.jpg" alt="Allied Executive Logo" class="h-56 w-auto rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="224" height="224" loading="lazy">
               </div>
-
-              <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed is-visible" style="animation-delay: 0.2s;">
+              <p class="text-lg text-gray-300 text-center max-w-2xl leading-relaxed opacity-0 transition-opacity duration-700">
                   During my internship, my marketing efforts were quite limited as I only focused on LinkedIn page marketing, attracting people who want to work. However, I pioneered the branding for one of their sister companies, Quickstart Solutions.
               </p>
-              <!-- Allied Executive Search Consultant Skills -->
-              <div id="allied-executive-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl is-visible" style="animation-delay: 0.3s;">
+              <div id="allied-executive-skills" class="flex flex-wrap justify-center gap-3 pt-6 pb-10 max-w-3xl opacity-0 transition-opacity duration-700">
                   <span class="skill-tag">Canva</span>
                   <span class="skill-tag">Linkedin</span>
                   <span class="skill-tag">Content Creation</span>
@@ -1089,289 +672,167 @@
           </div>
       </section>
 
-      <!-- New Section for Quickstart Solution's Marketing Collaterals -->
       <section id="quickstart-marketing-collaterals" class="mx-auto max-w-6xl px-6 pt-24 pb-32 text-white text-center">
         <h2 class="text-5xl font-bold mb-16 mt-8">
           Quickstart Solution's <br><span class="glowing-text">Marketing Collaterals</span>
         </h2>
-
         <div class="flex flex-col items-center gap-8 mb-8 max-w-4xl mx-auto">
-          <img src="https://imgur.com/FlVpqzw.jpg" alt="Quickstart Marketing Collateral 1" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+1';" loading="lazy" width="600" height="400" style="animation-delay: 0.1s;"/>
-          <img src="https://imgur.com/qkM1cbp.jpg" alt="Quickstart Marketing Collateral 2" class="w-full rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Quickstart+Collateral+2';" loading="lazy" width="600" height="400" style="animation-delay: 0.2s;"/>
+          <img src="https://imgur.com/FlVpqzw.jpg" alt="Quickstart Collateral 1" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
+          <img src="https://imgur.com/qkM1cbp.jpg" alt="Quickstart Collateral 2" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
         </div>
-
         <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mt-8">
           I created these marketing collaterals using Canvas to help establish the page's branding on <a href="https://www.linkedin.com/company/quickstart-careers/posts/?feedView=all" target="_blank" class="text-blue-400 hover:underline">LinkedIn.ph</a> and improve its overall presence.
         </p>
       </section>
 
-      <!-- Moved Credentials Section to the bottom -->
       <section id="credentials-section" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Certificates of Completion</h2>
-
           <div class="max-w-4xl w-full flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
-              <img src="https://imgur.com/OBhcpMI.jpg" alt="Certificate of Completion 1" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+1';" loading="lazy" width="600" height="400" style="animation-delay: 0.1s;"/>
-              <img src="https://imgur.com/FNsy9V2.jpg" alt="Certificate of Completion 2" class="w-full md:w-1/2 rounded-lg shadow-lg is-visible" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Certificate+2';" loading="lazy" width="600" height="400" style="animation-delay: 0.2s;"/>
+              <img src="https://imgur.com/OBhcpMI.jpg" alt="Certificate 1" class="w-full md:w-1/2 rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
+              <img src="https://imgur.com/FNsy9V2.jpg" alt="Certificate 2" class="w-full md:w-1/2 rounded-lg shadow-lg opacity-0 transition-opacity duration-700" width="600" height="400" loading="lazy" />
           </div>
       </section>
 
-      <!-- NEW CONTACT SECTION -->
       <section id="contact" class="w-full px-6 py-20 relative overflow-hidden text-white flex flex-col justify-center items-center">
           <h2 class="text-5xl font-bold mb-12 text-center about-heading-gradient">Get in Touch</h2>
-
-          <div class="glass-card p-8 shadow-lg w-full max-w-md text-center flex flex-col items-center gap-6">
+          <div class="glass-card p-8 shadow-lg w-full max-w-md text-center flex flex-col items-center gap-6 is-visible" style="transform: translateY(0); opacity: 1;">
               <p class="text-lg text-gray-300 mb-4">
                   Feel free to reach out to me via email or phone. I'm always open to new opportunities and collaborations!
               </p>
-
               <div class="flex items-center justify-between w-full p-3 bg-gray-900 rounded-lg border border-gray-700">
                   <div class="flex items-center gap-3">
-                      <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.69 5.66a3 3 0 0 1-3.42 0L1.5 8.67Z" />
-                          <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.71 6.316a2.25 2.25 0 0 0 2.58 0L22.5 6.908Z" />
-                      </svg>
+                      <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.69 5.66a3 3 0 0 1-3.42 0L1.5 8.67Z" /><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.71 6.316a2.25 2.25 0 0 0 2.58 0L22.5 6.908Z" /></svg>
                       <span id="email-address" class="text-white text-base font-medium">shunsuke.fernando19@gmail.com</span>
                   </div>
-                  <button class="copy-button" onclick="copyToClipboard('email-address', 'email-feedback')">Copy</button>
+                  <button class="copy-button" onclick="copyToClipboard('email-address', 'email-feedback')" aria-label="Copy Email">Copy</button>
                   <span id="email-feedback" class="copy-feedback">Copied!</span>
               </div>
-
               <div class="flex items-center justify-between w-full p-3 bg-gray-900 rounded-lg border border-gray-700">
                   <div class="flex items-center gap-3">
-                      <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.99 1.403l.716 3.22c.15.67.01 1.42-.364 1.96l-2.059 2.059a11.225 11.225 0 0 0 6.102 6.102l2.059-2.059a1.5 1.5 0 0 1 1.96-.364l3.22.716c.813.38 1.403 1.13 1.403 1.99v1.372a3 3 0 0 1-3 3c-11.177 0-20-8.823-20-20Z" clip-rule="evenodd" />
-                      </svg>
+                      <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.99 1.403l.716 3.22c.15.67.01 1.42-.364 1.96l-2.059 2.059a11.225 11.225 0 0 0 6.102 6.102l2.059-2.059a1.5 1.5 0 0 1 1.96-.364l3.22.716c.813.38 1.403 1.13 1.403 1.99v1.372a3 3 0 0 1-3 3c-11.177 0-20-8.823-20-20Z" clip-rule="evenodd" /></svg>
                       <span id="phone-number" class="text-white text-base font-medium">09622976011</span>
                   </div>
-                  <button class="copy-button" onclick="copyToClipboard('phone-number', 'phone-feedback')">Copy</button>
+                  <button class="copy-button" onclick="copyToClipboard('phone-number', 'phone-feedback')" aria-label="Copy Phone Number">Copy</button>
                   <span id="phone-feedback" class="copy-feedback">Copied!</span>
               </div>
           </div>
       </section>
-
     </main>
 
     <footer class="text-center py-8 px-6">
-      <div class="glass-card inline-block px-8 py-6 max-w-md">
+      <div class="glass-card inline-block px-8 py-6 max-w-md is-visible" style="transform: translateY(0); opacity: 1;">
         <span class="text-xl font-bold text-white block">Fernando</span>
         <span class="mt-1 text-sm text-gray-400 block">Made by Shunsuke Fernando on GitHub</span>
       </div>
     </footer>
 
-    <!-- Moved Tailwind CSS script to the end of body for better performance -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const greetingsTextContainer = document.getElementById('greetings-text');
-        const glassCards = document.querySelectorAll('.glass-card');
         const navbar = document.querySelector('.navbar');
         const homeSection = document.getElementById('home');
         const homeGradientBg = document.getElementById('home-gradient-bg');
-        const aboutMeContent = document.getElementById('about-me-content'); // Get the new about me content div
-        const professionalExperienceSection = document.getElementById('professional-experience-section'); // Get the new professional experience section
-        const timelineItems = document.querySelectorAll('.timeline-item'); // Get all timeline items
-        const blogPostsSection = document.getElementById('blog-posts'); // Get the new blog posts section
-        const versaillesMarketingCollateralsSection = document.getElementById('versailles-marketing-collaterals'); // Get the new Marketing Collaterals section
-        const redesignedWebsiteSection = document.getElementById('redesigned-website'); // Get the new redesigned website section
-        const alliedExecutiveWorksSection = document.getElementById('allied-executive-works'); // Get the new Allied Executive Search Consultant section
-        const quickstartMarketingCollateralsSection = document.getElementById('quickstart-marketing-collaterals'); // Get the new Quickstart Marketing Collaterals section
-        const statePropertiesSkills = document.getElementById('state-properties-skills'); // New: State Properties Skills section
-        const alliedExecutiveSkills = document.getElementById('allied-executive-skills'); // New: Allied Executive Skills section
-        const credentialsSection = document.getElementById('credentials-section'); // New: Credentials Section
-        const contactSection = document.getElementById('contact'); // New: Contact Section
-
-
-        // Constants for gradient effect (shared for consistency)
-        const GRADIENT_START_SIZE = 800; // Initial background size percentage
-        const GRADIENT_END_SIZE = 10;    // Final background size percentage when fully scrolled
-        const GRADIENT_START_OPACITY = 1; // Initial opacity
-        const GRADIENT_END_OPACITY = 0;    // Final opacity when fully scrolled
-
-        // Constants for home section fixed minimization effect
-        const MINIMIZE_THRESHOLD = 100; // Pixels scrolled down to trigger minimization (for class toggle)
-
-        // Greetings animation setup
+        
+        // --- Greeting Animation ---
         const greetings = ["Greetings!", "Bonjour!", "Hola!", "안녕하세요!", "Mabuhay!"];
         let currentGreetingIndex = 0;
         let greetingSpan = document.createElement('span');
         greetingsTextContainer.appendChild(greetingSpan);
-
-        /**
-         * Animates the greeting text by fading out the current greeting
-         * and fading in the next one in the sequence.
-         */
-        function animateGreetingText() {
-          greetingSpan.style.opacity = '0'; // Start fading out
-
-          setTimeout(() => {
-            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length; // Cycle through greetings
-            greetingSpan.textContent = greetings[currentGreetingIndex]; // Update text
-            greetingSpan.style.opacity = '1'; // Fade in
-          }, 1000); // Wait 1 second for fade out, then change text and fade in
-        }
-
-        // Initialize first greeting and start animation interval
         greetingSpan.textContent = greetings[0];
         greetingSpan.style.opacity = '1';
-        setInterval(animateGreetingText, 3000); // Change greeting every 3 seconds
 
+        function animateGreetingText() {
+          greetingSpan.style.opacity = '0';
+          setTimeout(() => {
+            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+            greetingSpan.textContent = greetings[currentGreetingIndex];
+            greetingSpan.style.opacity = '1';
+          }, 1000);
+        }
+        setInterval(animateGreetingText, 3000);
 
-        // Intersection Observer to animate glass cards, about-me-content, and timeline items into view
-        const observerOptions = {
-          root: null, // Observe relative to the viewport
-          rootMargin: '0px 0px -10% 0px', // When 10% of element is visible from bottom
-          threshold: 0.1 // Trigger when 10% of the target is visible
-        };
+        // --- Optimized Scroll Listener (RequestAnimationFrame) ---
+        let homeHeight = homeSection.offsetHeight;
+        window.addEventListener('resize', () => { homeHeight = homeSection.offsetHeight; });
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        let ticking = false;
+        
+        function updateScrollVisuals() {
+          const scrollY = window.scrollY;
+          
+          // Navbar Logic
+          if (scrollY > 50) navbar.classList.add('scrolled');
+          else navbar.classList.remove('scrolled');
+
+          // Gradient Background Logic
+          // Calculate progress 0.0 to 1.0 based on 75% of home section height
+          const progress = Math.min(Math.max(scrollY / (homeHeight * 0.75), 0), 1);
+          
+          // Pre-calculate values to avoid CSS var overhead in loop
+          const startSize = 800;
+          const endSize = 10;
+          const size = startSize - (startSize - endSize) * progress;
+          
+          homeGradientBg.style.backgroundSize = `${size}% ${size}%`;
+          homeGradientBg.style.opacity = 1 - progress;
+
+          if (scrollY > 100) homeGradientBg.classList.add('minimized');
+          else homeGradientBg.classList.remove('minimized');
+
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateScrollVisuals);
+            ticking = true;
+          }
+        });
+        
+        // Initial check
+        updateScrollVisuals();
+
+        // --- Intersection Observer for Animations ---
+        const observer = new IntersectionObserver((entries, obs) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              // Add 'is-visible' class to trigger CSS animation
               entry.target.classList.add('is-visible');
-              // Stop observing once visible to prevent re-triggering
-              observer.unobserve(entry.target);
+              // For elements that use simple opacity transitions
+              if(entry.target.classList.contains('opacity-0')) {
+                  entry.target.classList.remove('opacity-0');
+              }
+              obs.unobserve(entry.target);
             }
           });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all glass cards for their entry animation
-        glassCards.forEach(card => {
-          observer.observe(card);
-        });
+        // Select all animate-able elements
+        const animateElements = document.querySelectorAll(
+          '.glass-card, .timeline-item, #about-me-content, .opacity-0'
+        );
+        animateElements.forEach(el => observer.observe(el));
 
-        // Observe the new about-me-content section for its entry animation
-        observer.observe(aboutMeContent);
-        // Observe individual timeline items for staggered animation
-        timelineItems.forEach(item => {
-            observer.observe(item);
-        });
-        // Observe the new blog posts section's content for animation
-        if (blogPostsSection) {
-            // No longer observing these elements for 'is-visible' as the class is removed
-            // const blogImagesContainer = blogPostsSection.querySelector('.flex.flex-col.md\\:flex-row');
-            // const blogParagraph = blogPostsSection.querySelector('p.text-lg');
-            // if (blogImagesContainer) observer.observe(blogImagesContainer);
-            // if (blogParagraph) observer.observe(blogParagraph);
-        }
-
-        // Observe the Versailles marketing collaterals section content for animation
-        if (versaillesMarketingCollateralsSection) {
-            const versaillesImages = versaillesMarketingCollateralsSection.querySelectorAll('img');
-            versaillesImages.forEach(img => observer.observe(img));
-        }
-
-        // Observe the redesigned website section content for animation
-        if (redesignedWebsiteSection) {
-            const redesignedImagesContainer = redesignedWebsiteSection.querySelector('.flex.flex-col.md\\:flex-row');
-            const redesignedParagraph = redesignedWebsiteSection.querySelector('p.text-lg');
-            if (redesignedImagesContainer) observer.observe(redesignedImagesContainer);
-            if (redesignedParagraph) observer.observe(redesignedParagraph);
-        }
-
-        // Observe the Allied Executive Search Consultant section content for animation
-        if (alliedExecutiveWorksSection) {
-            const alliedLogo = alliedExecutiveWorksSection.querySelector('img');
-            const alliedParagraph = alliedExecutiveWorksSection.querySelector('p.text-lg');
-            if (alliedLogo) observer.observe(alliedLogo);
-            if (alliedParagraph) observer.observe(alliedParagraph);
-        }
-
-        // Observe the Quickstart Marketing Collaterals section content for animation
-        if (quickstartMarketingCollateralsSection) {
-            const quickstartImages = quickstartMarketingCollateralsSection.querySelectorAll('img');
-            quickstartImages.forEach(img => observer.observe(img));
-            const quickstartParagraph = quickstartMarketingCollateralsSection.querySelector('p.text-lg');
-            if (quickstartParagraph) observer.observe(quickstartParagraph);
-        }
-
-        // New: Observe State Properties Skills section
-        if (statePropertiesSkills) {
-            observer.observe(statePropertiesSkills);
-        }
-
-        // New: Observe Allied Executive Skills section
-        if (alliedExecutiveSkills) {
-            observer.observe(alliedExecutiveSkills);
-        }
-
-        // New: Observe Credentials Section
-        if (credentialsSection) {
-            const credentialsImages = credentialsSection.querySelectorAll('img');
-            credentialsImages.forEach(img => observer.observe(img));
-        }
-
-        // New: Observe Contact Section
-        if (contactSection) {
-            observer.observe(contactSection);
-        }
-
-
-        /**
-         * Handles scroll events for navbar and home section background animations.
-         */
-        function handleScroll() {
-          const scrollY = window.scrollY;
-
-          // Navbar scroll effect
-          if (scrollY > 50) { // Add 'scrolled' class after scrolling down 50px
-            navbar.classList.add('scrolled');
-          } else {
-            navbar.classList.remove('scrolled');
-          }
-
-          // Home section gradient minimization and fade effect
-          const homeSectionHeight = homeSection.offsetHeight;
-          // Calculate scroll progress within the home section
-          // Ensure it doesn't go below 0 or above 1
-          const scrollProgress = Math.max(0, Math.min(1, scrollY / (homeSectionHeight * 0.75))); // Adjust divisor to control fade speed
-
-          // Interpolate background size
-          const currentBgSize = GRADIENT_START_SIZE - (GRADIENT_START_SIZE - GRADIENT_END_SIZE) * scrollProgress;
-          homeGradientBg.style.backgroundSize = `${currentBgSize}% ${currentBgSize}%`;
-
-          // Interpolate opacity
-          const currentOpacity = GRADIENT_START_OPACITY - (GRADIENT_START_OPACITY - GRADIENT_END_OPACITY) * scrollProgress;
-          homeGradientBg.style.opacity = currentOpacity;
-
-          // Toggle 'minimized' class for transform and border-radius
-          if (scrollY > MINIMIZE_THRESHOLD) {
-            homeGradientBg.classList.add('minimized');
-          } else {
-            homeGradientBg.classList.remove('minimized');
-          }
-        }
-
-        // Add scroll event listener
-        window.addEventListener('scroll', handleScroll);
-
-        // Initial call to handleScroll to set correct state if page is loaded scrolled
-        handleScroll();
-
-        /**
-         * Copies text from a specified element to the clipboard and shows feedback.
-         * @param {string} elementId The ID of the element containing the text to copy.
-         * @param {string} feedbackId The ID of the element to show feedback in.
-         */
+        // --- Copy to Clipboard ---
         window.copyToClipboard = function(elementId, feedbackId) {
             const element = document.getElementById(elementId);
             const feedbackElement = document.getElementById(feedbackId);
-            if (!element || !feedbackElement) {
-                console.error('Element or feedback element not found.');
-                return;
-            }
+            if (!element || !feedbackElement) return;
 
-            const textToCopy = element.textContent;
-            const tempInput = document.createElement('textarea');
-            tempInput.value = textToCopy;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-
-            feedbackElement.classList.add('show');
-            setTimeout(() => {
-                feedbackElement.classList.remove('show');
-            }, 2000); // Hide "Copied!" after 2 seconds
+            navigator.clipboard.writeText(element.textContent).then(() => {
+                feedbackElement.classList.add('show');
+                setTimeout(() => feedbackElement.classList.remove('show'), 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const tempInput = document.createElement('textarea');
+                tempInput.value = element.textContent;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                feedbackElement.classList.add('show');
+                setTimeout(() => feedbackElement.classList.remove('show'), 2000);
+            });
         };
       });
     </script>
